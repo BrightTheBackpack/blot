@@ -240,6 +240,7 @@ const _redraw = (canvas: HTMLCanvasElement,animation = false) => {
   const { panX, panY, scale } = panZoomParams
   let j = 0;
   for (const turtle of turtles) {
+    ctx.clearRect(0, 0, width, height)
     ctx.beginPath()
 
     for (const polyline of turtle.path) {
