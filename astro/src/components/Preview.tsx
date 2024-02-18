@@ -165,7 +165,7 @@ let dpr = typeof window === 'undefined' ? 1 : window.devicePixelRatio || 1
 
 const requestRedraw = (canvas: HTMLCanvasElement) => {
   requestAnimationFrame(() => {
-    _redraw(canvas)
+    _redraw(canvas,false)
   })
 }
 
@@ -186,7 +186,7 @@ const getCtx = (canvas: HTMLCanvasElement) => {
   return _ctx!
 }
 
-const _redraw = (canvas: HTMLCanvasElement) => {
+const _redraw = (canvas: HTMLCanvasElement,animation = true) => {
   const {
     turtlePos,
     turtles,
@@ -262,8 +262,11 @@ const _redraw = (canvas: HTMLCanvasElement) => {
     if (turtle.style.fill !== 'none') ctx.fill()
        
         },j)
+        if(animation){
+            j+=1000
+        }
         
-       j+=1000
+     
       
       })
     }
