@@ -199,6 +199,8 @@ async function runCodeInner(str, globalScope) {
     console.log('about to throw error')
     throw err
   })
+  console.log(turtles)
+  console.log(turtles.at(-1)?.position ?? [0,0])
 
   patchStore({
     turtles,
