@@ -192,6 +192,7 @@ const _redraw = (canvas: HTMLCanvasElement,animation = true) => {
     turtles,
     docDimensions: { width: docW, height: docH }
   } = getStore()
+  console.log(debounce)
   if (!canvas || !turtlePos || debounce) return
   debounce = true
 
