@@ -89,13 +89,18 @@ const customGlobal = {
     return (1 - t) * start + t * end
   },
   drawTurtles: (turtlesToDraw: Turtle[], style = {}) => {
+    let i = 0
     turtlesToDraw.forEach(t => {
       const temp = t.copy()
       if (style.fill === undefined) style.fill = 'none'
-      if (style.stroke === undefined) style.stroke = 'black'
+      setTimeout(()=>{
+           if (style.stroke === undefined) style.stroke = 'black'
       if (style.width === undefined) style.width = 1
       temp.style = style
       turtles.push(temp)
+      },i)
+      i+=1000
+   
     })
   },
   setDocDimensions(w: number, h: number) {
