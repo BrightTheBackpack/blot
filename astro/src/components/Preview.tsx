@@ -10,6 +10,7 @@ import { createListener } from '../lib/createListener.js'
 
 export default function Preview(props: { className?: string }) {
   const { turtles, docDimensions } = getStore()
+ patchStore({ debounce: false })
 
   useEffect(init, [])
 
@@ -185,16 +186,17 @@ const getCtx = (canvas: HTMLCanvasElement) => {
   }
   return _ctx!
 }
-let debounce = false
+
 const _redraw = (canvas: HTMLCanvasElement,animation = true) => {
   const {
     turtlePos,
+    debounce,
     turtles,
     docDimensions: { width: docW, height: docH }
   } = getStore()
   console.log(debounce)
   if (!canvas || !turtlePos || debounce) return
-  debounce = true
+  patchStore({ debounce: true })
 
   // we want to only work in virtual pixels, and just deal with device pixels in rendering
   const width = canvas.width /* / dpr*/
@@ -272,7 +274,7 @@ const _redraw = (canvas: HTMLCanvasElement,animation = true) => {
       
       })
     }
-    debounce = false
+    
 
   }
 }
