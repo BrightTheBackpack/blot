@@ -1,6 +1,6 @@
 import { useRef, useEffect, useCallback } from 'preact/hooks'
 import styles from './Preview.module.css'
-import { getStore } from '../lib/state.ts'
+import { patchStore,getStore } from '../lib/state.ts'
 import CenterToFitIcon from '../ui/CenterToFitIcon.tsx'
 import Button from '../ui/Button.tsx'
 import type { Point } from '../lib/drawingToolkit/index.js'
