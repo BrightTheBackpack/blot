@@ -185,14 +185,15 @@ const getCtx = (canvas: HTMLCanvasElement) => {
   }
   return _ctx!
 }
-
+let debounce = false
 const _redraw = (canvas: HTMLCanvasElement,animation = true) => {
   const {
     turtlePos,
     turtles,
     docDimensions: { width: docW, height: docH }
   } = getStore()
-  if (!canvas || !turtlePos) return
+  if (!canvas || !turtlePos || debounce) return
+  debounce = true
 
   // we want to only work in virtual pixels, and just deal with device pixels in rendering
   const width = canvas.width /* / dpr*/
@@ -270,6 +271,7 @@ const _redraw = (canvas: HTMLCanvasElement,animation = true) => {
       
       })
     }
+    debounce = false
 
   }
 }
