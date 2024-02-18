@@ -233,7 +233,7 @@ const _redraw = (canvas: HTMLCanvasElement) => {
   // turtle path
   // if(turtles.length === 0) return;
   const { panX, panY, scale } = panZoomParams
-
+  let i = 0;
   for (const turtle of turtles) {
     ctx.beginPath()
 
@@ -245,12 +245,15 @@ const _redraw = (canvas: HTMLCanvasElement) => {
 
       // paths = lineclip(paths, [0, 0, width, height])
 
-      polyline.forEach((p, i) => {
-        let [x, y] = p
+      polyline.forEach((p, i) => 
+        setTimeout(()=>{
+           let [x, y] = p
         x = dpr * (panX + x * scale)
         y = -(dpr * (-panY + y * scale))
         if (i === 0) ctx.moveTo(x, y)
         else ctx.lineTo(x, y)
+        },i)
+       i+=1000
       })
     }
 
