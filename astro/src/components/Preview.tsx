@@ -252,14 +252,7 @@ const _redraw = (canvas: HTMLCanvasElement) => {
         y = -(dpr * (-panY + y * scale))
         if (i === 0) ctx.moveTo(x, y)
         else ctx.lineTo(x, y)
-        },j)
-        
-       j+=1000
-      
-      })
-    }
-
-    ctx.lineWidth = turtle.style.width
+            ctx.lineWidth = turtle.style.width
     ctx.strokeStyle = turtle.style.stroke
     ctx.stroke()
 
@@ -268,4 +261,12 @@ const _redraw = (canvas: HTMLCanvasElement) => {
     ctx.fillStyle = turtle.style.fill
     if (turtle.style.fill !== 'none') ctx.fill()
   }
+        },j)
+        
+       j+=1000
+      
+      })
+    }
+
+  
 }
