@@ -188,7 +188,7 @@ const getCtx = (canvas: HTMLCanvasElement) => {
   return _ctx!
 }
 
-const _redraw = (canvas: HTMLCanvasElement,animation = true) => {
+const _redraw = (canvas: HTMLCanvasElement,animation = false) => {
   const {
     turtlePos,
    // debounce,
