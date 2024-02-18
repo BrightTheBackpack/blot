@@ -15,7 +15,7 @@ export default function Preview(props: { className?: string }) {
 
   useEffect(() => {
     const canvas = document.querySelector('.main-canvas')
-    requestRedraw(canvas)
+    requestRedraw(canvas,true)
   })
 
   return (
@@ -53,7 +53,7 @@ function init() {
   panZoomParams.panY =
     br.height / 2 + (docDimensions.height * panZoomParams.scale) / 2
 
-  requestRedraw(canvas)
+  requestRedraw(canvas,true)
 
   canvasListener(
     'wheel',
@@ -163,9 +163,9 @@ const panZoomParams = {
 
 let dpr = typeof window === 'undefined' ? 1 : window.devicePixelRatio || 1
 
-const requestRedraw = (canvas: HTMLCanvasElement) => {
+const requestRedraw = (canvas: HTMLCanvasElement,animation = false) => {
   requestAnimationFrame(() => {
-    _redraw(canvas,false)
+    _redraw(canvas,animation)
   })
 }
 
