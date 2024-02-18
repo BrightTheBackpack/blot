@@ -233,7 +233,7 @@ const _redraw = (canvas: HTMLCanvasElement) => {
   // turtle path
   // if(turtles.length === 0) return;
   const { panX, panY, scale } = panZoomParams
-  let i = 0;
+  let j = 0;
   for (const turtle of turtles) {
     ctx.beginPath()
 
@@ -252,8 +252,10 @@ const _redraw = (canvas: HTMLCanvasElement) => {
         y = -(dpr * (-panY + y * scale))
         if (i === 0) ctx.moveTo(x, y)
         else ctx.lineTo(x, y)
-        },i)
-       i+=1000
+        },j)
+        
+       j+=1000
+      
       })
     }
 
