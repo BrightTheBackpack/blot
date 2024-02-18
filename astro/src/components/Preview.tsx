@@ -10,6 +10,7 @@ import { createListener } from '../lib/createListener.js'
 
 export default function Preview(props: { className?: string }) {
   const { turtles, docDimensions } = getStore()
+  patchStore({ debounce })
  patchStore({ debounce: false })
 
   useEffect(init, [])
