@@ -260,7 +260,7 @@ const _redraw = (canvas: HTMLCanvasElement) => {
 
     ctx.fillStyle = turtle.style.fill
     if (turtle.style.fill !== 'none') ctx.fill()
-  }
+       
         },j)
         
        j+=1000
@@ -268,5 +268,5 @@ const _redraw = (canvas: HTMLCanvasElement) => {
       })
     }
 
-  
+  }
 }
