@@ -252,6 +252,21 @@ const _redraw = (canvas: HTMLCanvasElement,animation = false) => {
       // paths = lineclip(paths, [0, 0, width, height])
 
       polyline.forEach((p, i) => {
+        if(!animation){
+                 let [x, y] = p
+        x = dpr * (panX + x * scale)
+        y = -(dpr * (-panY + y * scale))
+        if (i === 0) ctx.moveTo(x, y)
+        else ctx.lineTo(x, y)
+            ctx.lineWidth = turtle.style.width
+    ctx.strokeStyle = turtle.style.stroke
+    ctx.stroke()
+
+    ctx.lineWidth = 1;
+
+    ctx.fillStyle = turtle.style.fill
+    if (turtle.style.fill !== 'none') ctx.fill()
+        }else{
         setTimeout(()=>{
            let [x, y] = p
         x = dpr * (panX + x * scale)
@@ -270,7 +285,7 @@ const _redraw = (canvas: HTMLCanvasElement,animation = false) => {
         },j)
         if(animation){
             j+=200
-        }
+        }}
         
      
       
