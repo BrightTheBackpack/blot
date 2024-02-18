@@ -126,6 +126,7 @@ const args = {
 
 export default async function runCode() {
   const code = getCode()
+  console.log(code)
 
   try {
     const ast = parse(code, { sourceType: 'module' })
