@@ -245,7 +245,7 @@ const _redraw = (canvas: HTMLCanvasElement) => {
 
       // paths = lineclip(paths, [0, 0, width, height])
 
-      polyline.forEach((p, i) => 
+      polyline.forEach((p, i) => {
         setTimeout(()=>{
            let [x, y] = p
         x = dpr * (panX + x * scale)
