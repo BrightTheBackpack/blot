@@ -191,13 +191,16 @@ const getCtx = (canvas: HTMLCanvasElement) => {
 const _redraw = (canvas: HTMLCanvasElement,animation = false) => {
   const {
     turtlePos,
-   // debounce,
+    animate,
     turtles,
     docDimensions: { width: docW, height: docH }
   } = getStore()
-  //console.log(debounce)
+  console.log(animate)
+  
   if (!canvas || !turtlePos) return
  // patchStore({ debounce: true })
+  patchStore({animate:false})
+
 
   // we want to only work in virtual pixels, and just deal with device pixels in rendering
   const width = canvas.width /* / dpr*/
@@ -240,7 +243,7 @@ const _redraw = (canvas: HTMLCanvasElement,animation = false) => {
   const { panX, panY, scale } = panZoomParams
   let j = 0;
   for (const turtle of turtles) {
-
+   
     ctx.beginPath()
 
     for (const polyline of turtle.path) {
@@ -252,35 +255,31 @@ const _redraw = (canvas: HTMLCanvasElement,animation = false) => {
       // paths = lineclip(paths, [0, 0, width, height])
 
       polyline.forEach((p, i) => {
-        if(!animation){
-                 let [x, y] = p
-        x = dpr * (panX + x * scale)
-        y = -(dpr * (-panY + y * scale))
-        if (i === 0) ctx.moveTo(x, y)
-        else ctx.lineTo(x, y)
-            ctx.lineWidth = turtle.style.width
-    ctx.strokeStyle = turtle.style.stroke
-    ctx.stroke()
-
-    ctx.lineWidth = 1;
-
-    ctx.fillStyle = turtle.style.fill
-    if (turtle.style.fill !== 'none') ctx.fill()
-        }else{
-        setTimeout(()=>{
-           let [x, y] = p
-        x = dpr * (panX + x * scale)
-        y = -(dpr * (-panY + y * scale))
-        if (i === 0) ctx.moveTo(x, y)
-        else ctx.lineTo(x, y)
-            ctx.lineWidth = turtle.style.width
-    ctx.strokeStyle = turtle.style.stroke
-    ctx.stroke()
-
-    ctx.lineWidth = 1;
-
-    ctx.fillStyle = turtle.style.fill
-    if (turtle.style.fill !== 'none') ctx.fill()
+        if(!animation && !animate){
+          let [x, y] = p
+          x = dpr * (panX + x * scale)
+          y = -(dpr * (-panY + y * scale))
+          if (i === 0) ctx.moveTo(x, y)
+          else ctx.lineTo(x, y)
+          ctx.lineWidth = turtle.style.width
+          ctx.strokeStyle = turtle.style.stroke
+          ctx.stroke()
+          ctx.lineWidth = 1;
+          ctx.fillStyle = turtle.style.fill
+          if (turtle.style.fill !== 'none') ctx.fill()
+        }else if(animate){
+          setTimeout(()=>{
+          let [x, y] = p
+          x = dpr * (panX + x * scale)
+          y = -(dpr * (-panY + y * scale))
+          if (i === 0) ctx.moveTo(x, y)
+          else ctx.lineTo(x, y)
+          ctx.lineWidth = turtle.style.width
+          ctx.strokeStyle = turtle.style.stroke
+          ctx.stroke()
+          ctx.lineWidth = 1;
+          ctx.fillStyle = turtle.style.fill
+         if (turtle.style.fill !== 'none') ctx.fill()
        
         },j)
         if(animation){

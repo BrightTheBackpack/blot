@@ -42,6 +42,7 @@ export default function Toolbar() {
           </a>
         </h1>
         <RunButton />
+        <RunAnimationButton />
         <div
           class="relative cursor-pointer w-max h-full flex items-center p-1 hover:bg-white hover:bg-opacity-10"
           onClick={() => saveFile(getCode())}>
@@ -245,6 +246,31 @@ function RunButton() {
   return (
     <Button variant="ghost" onClick={() => runCode()}>
       run (shift+enter)
+    </Button>
+  )
+}
+function RunAnimationButton() {
+  
+  // keyboard shortcut - shift+enter
+  useEffect(() => {
+    async function handleKeyDown(e: KeyboardEvent) {
+      if (e.shiftKey && e.key === 'Enter') {
+        e.preventDefault()
+        e.stopPropagation()
+        await runCode()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
+  return (
+    <Button variant="ghost" onClick={() => {runCode()
+      patchStore({animate:true})
+      }}>
+      run animation
     </Button>
   )
 }

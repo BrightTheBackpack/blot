@@ -209,7 +209,8 @@ async function runCodeInner(str, globalScope) {
 
   patchStore({
     turtles,
-    turtlePos: turtles.at(-1)?.position ?? [0, 0]
+    turtlePos: turtles.at(-1)?.position ?? [0, 0],
+    animate: true
   })
 }
 

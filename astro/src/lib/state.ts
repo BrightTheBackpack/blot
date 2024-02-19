@@ -41,6 +41,8 @@ export type GlobalState = {
   fileHandle: any
   needsSaving: boolean
   machineRunning: boolean
+  animate: false
+
 }
 
 // setting/initializing state
@@ -62,7 +64,8 @@ const newState: Omit<GlobalState, 'code'> = {
   vimMode: false,
   fileHandle: null,
   needsSaving: false,
-  machineRunning: false
+  machineRunning: false,
+  animate: false
 }
 
 export const makeNewState = (): GlobalState => {
