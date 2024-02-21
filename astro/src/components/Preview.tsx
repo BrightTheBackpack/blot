@@ -193,13 +193,14 @@ const _redraw = (canvas: HTMLCanvasElement,animation = false) => {
     turtlePos,
     animate,
     turtles,
+    turtles_animated,
     docDimensions: { width: docW, height: docH }
   } = getStore()
-  console.log(animate)
+  
   
   if (!canvas || !turtlePos) return
  // patchStore({ debounce: true })
-  patchStore({animate:false})
+  //patchStore({animate:false})
 
 
   // we want to only work in virtual pixels, and just deal with device pixels in rendering
@@ -255,7 +256,7 @@ const _redraw = (canvas: HTMLCanvasElement,animation = false) => {
       // paths = lineclip(paths, [0, 0, width, height])
 
       polyline.forEach((p, i) => {
-        if(!animation && !animate){
+        if( !animation||!animate){//if(!animate && !animation)
           let [x, y] = p
           x = dpr * (panX + x * scale)
           y = -(dpr * (-panY + y * scale))
@@ -267,24 +268,25 @@ const _redraw = (canvas: HTMLCanvasElement,animation = false) => {
           ctx.lineWidth = 1;
           ctx.fillStyle = turtle.style.fill
           if (turtle.style.fill !== 'none') ctx.fill()
-        }else if(animate){
-          setTimeout(()=>{
-          let [x, y] = p
-          x = dpr * (panX + x * scale)
-          y = -(dpr * (-panY + y * scale))
-          if (i === 0) ctx.moveTo(x, y)
-          else ctx.lineTo(x, y)
-          ctx.lineWidth = turtle.style.width
-          ctx.strokeStyle = turtle.style.stroke
-          ctx.stroke()
-          ctx.lineWidth = 1;
-          ctx.fillStyle = turtle.style.fill
-         if (turtle.style.fill !== 'none') ctx.fill()
+        }else{
+      setTimeout(()=>{
+       // patchStore({animate:false})
+        let [x, y] = p
+        x = dpr * (panX + x * scale)
+        y = -(dpr * (-panY + y * scale))
+        if (i === 0) ctx.moveTo(x, y)
+        else ctx.lineTo(x, y)
+        ctx.lineWidth = turtle.style.width
+        ctx.strokeStyle = turtle.style.stroke
+        ctx.stroke()
+        ctx.lineWidth = 1;
+        ctx.fillStyle = turtle.style.fill
+        if (turtle.style.fill !== 'none') ctx.fill()
+        },j) 
+        j+=20
+        
        
-        },j)
-        if(animation){
-            j+=200
-        }}
+        }
         
      
       
@@ -293,4 +295,24 @@ const _redraw = (canvas: HTMLCanvasElement,animation = false) => {
     
 
   }
+  // if(animate){
+  //   for(const turtle of turtles){
+  //     ctx.beginPath()
+      
+  //   for(const polyline of turtle.path){
+  //     let [x1, y1, x2, y2] = polyline
+  //     x1 = dpr * (panX + x1 * scale)
+  //     y1 = -(dpr * (-panY + y1 * scale))
+  //     x2 = dpr * (panX + x2 * scale)
+  //     y2 = -(dpr * (-panY + y2 * scale))
+  //     ctx.beginPath()
+  //     ctx.moveTo(x1, y1)
+  //     ctx.lineTo(x2, y2)
+  //     ctx.lineWidth = 1
+  //     ctx.strokeStyle = 'black'
+  //     ctx.stroke()
+  //   }}
+
+  // }
+ 
 }

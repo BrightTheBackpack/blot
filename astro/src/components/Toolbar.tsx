@@ -234,6 +234,7 @@ function RunButton() {
       if (e.shiftKey && e.key === 'Enter') {
         e.preventDefault()
         e.stopPropagation()
+        patchStore({animate:false})
         await runCode()
       }
     }
@@ -244,7 +245,8 @@ function RunButton() {
   }, [])
 
   return (
-    <Button variant="ghost" onClick={() => runCode()}>
+    <Button variant="ghost" onClick={() => {patchStore({animate:false})
+    runCode()}}>
       run (shift+enter)
     </Button>
   )
@@ -267,8 +269,10 @@ function RunAnimationButton() {
   }, [])
 
   return (
-    <Button variant="ghost" onClick={() => {runCode()
+    <Button variant="ghost" onClick={() => {
       patchStore({animate:true})
+      runCode()
+      
       }}>
       run animation
     </Button>

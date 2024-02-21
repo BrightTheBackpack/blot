@@ -166,6 +166,20 @@ export default async function runCode() {
     patchStore({ error })
   }
 }
+function calculateDistance(x1, y1, x2, y2) {
+  return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+}
+
+function splitLineByLength(x1, y1, x2, y2, numSplits) {
+  let points = [];
+  for (let i = 0; i <= numSplits; i++) {
+    let t = i / numSplits;
+    let interpolatedX = (1 - t) * x1 + t * x2;
+    let interpolatedY = (1 - t) * y1 + t * y2;
+    points.push([interpolatedX, interpolatedY]);
+  }
+  return points;
+}
 
 async function runCodeInner(str, globalScope) {
   intervals.forEach(clearInterval)
@@ -173,6 +187,7 @@ async function runCodeInner(str, globalScope) {
   intervals = []
   timeouts = []
   turtles = []
+  let turtles_animated = []
 
   patchStore(
     {
@@ -204,13 +219,34 @@ async function runCodeInner(str, globalScope) {
     console.log('about to throw error')
     throw err
   })
-  console.log(turtles)
-  console.log(turtles.at(-1)?.position ?? [0,0])
+  // console.log(turtles)
+  // console.log(turtles.at(-1)?.position ?? [0,0])
+  for(const turtle of turtles){
+    console.log('ran turtle')
+    for(const polyline of turtle.path){
+      console.log('ran polyline')
+      let [x1, y1] = polyline
+      
+      let [x2, y2] = turtle.path[turtle.path.indexOf(polyline) + 1] ?? [0, 0];
+      let distance = calculateDistance(x1, y1, x2, y2);
+      let numSplits = distance / 1;
+      let points = splitLineByLength(x1, y1, x2, y2, numSplits);
+      
+      turtles_animated.push(points)
+      
+      
+    }
+
+  }
+  console.log(turtles_animated)
+
+
 
   patchStore({
     turtles,
     turtlePos: turtles.at(-1)?.position ?? [0, 0],
-    animate: true
+    turtles_animated:turtles_animated
+    //animate: false
   })
 }
 
