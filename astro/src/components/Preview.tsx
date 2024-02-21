@@ -31,6 +31,8 @@ export default function Preview(props: { className?: string }) {
         aria-label="center document in view">
         <CenterToFitIcon />
       </Button>
+      <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+      </input>
     </div>
   )
 }
