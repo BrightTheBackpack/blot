@@ -44,7 +44,8 @@
     "prismjs": "^1.29.0",
     "source-map-js": "^1.0.2",
     "tailwindcss": "^3.0.24",
-    "three": "^0.155.0"
+    "three": "^0.155.0",
+    "yarn": "^1.22.21"
   },
   "devDependencies": {
     "@astrojs/node": "7.0.2",

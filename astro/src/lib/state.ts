@@ -41,8 +41,10 @@ export type GlobalState = {
   fileHandle: any
   needsSaving: boolean
   machineRunning: boolean
-  animate: false
+  animate: boolean
   turtles_animated: []
+  override: boolean
+  animation_speed : 50
 
 }
 
@@ -67,7 +69,9 @@ const newState: Omit<GlobalState, 'code'> = {
   needsSaving: false,
   machineRunning: false,
   animate: false,
-  turtles_animated: []
+  override: false,
+  turtles_animated: [],
+  animation_speed: 50
 }
 
 export const makeNewState = (): GlobalState => {

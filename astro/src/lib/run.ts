@@ -131,7 +131,7 @@ const args = {
 
 export default async function runCode() {
   const code = getCode()
-  console.log(code)
+  //console.log(code)
 
   try {
     const ast = parse(code, { sourceType: 'module' })
@@ -189,6 +189,7 @@ async function runCodeInner(str, globalScope) {
   turtles = []
   let turtles_animated = []
 
+  patchStore({override: true})
   patchStore(
     {
       console: [],
@@ -238,7 +239,7 @@ async function runCodeInner(str, globalScope) {
     }
 
   }
-  console.log(turtles_animated)
+  //console.log(turtles_animated)
 
 
 

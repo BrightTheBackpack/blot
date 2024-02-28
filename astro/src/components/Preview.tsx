@@ -14,11 +14,13 @@ export default function Preview(props: { className?: string }) {
  // patchStore({ debounce: false })
 
   useEffect(init, [])
+  let animation_speed = getStore()
 
   useEffect(() => {
     const canvas = document.querySelector('.main-canvas')
     requestRedraw(canvas,true)
   })
+  let speed = 50;
 
   return (
     <div class={styles.root}>
@@ -31,7 +33,9 @@ export default function Preview(props: { className?: string }) {
         aria-label="center document in view">
         <CenterToFitIcon />
       </Button>
-      <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+      <input type="range" min="1" max="100" value={animation_speed} class="slider" id="myRange" onChange={()=>{
+        patchStore(animation_speed)
+      }}>
       </input>
     </div>
   )
@@ -79,7 +83,7 @@ function init() {
       panZoomParams.panY =
         fixedPoint.y + (newScale / scale) * (panY - fixedPoint.y)
       panZoomParams.scale = newScale
-
+      patchStore({override:true})
       requestRedraw(canvas)
     },
     { passive: false }
@@ -118,7 +122,7 @@ function init() {
 
     panZoomParams.panX += e.movementX
     panZoomParams.panY += e.movementY
-
+    patchStore({override:true})
     requestRedraw(canvas)
   })
 
@@ -140,7 +144,7 @@ function init() {
       br.width / 2 - (docDimensions.width * panZoomParams.scale) / 2
     panZoomParams.panY =
       br.height / 2 + (docDimensions.height * panZoomParams.scale) / 2
-
+      patchStore({override:true})
     requestRedraw(canvas)
   })
 
@@ -150,6 +154,7 @@ function init() {
     canvas.width = width * dpr
     canvas.height = height * dpr
     setCtxProperties() // setting width/height clears ctx state
+    patchStore({override:true})
 
     requestRedraw(canvas)
   })
@@ -169,7 +174,9 @@ let dpr = typeof window === 'undefined' ? 1 : window.devicePixelRatio || 1
 
 const requestRedraw = (canvas: HTMLCanvasElement,animation = false) => {
   requestAnimationFrame(() => {
+    
     _redraw(canvas,animation)
+  
   })
 }
 
@@ -196,13 +203,23 @@ const _redraw = (canvas: HTMLCanvasElement,animation = false) => {
     animate,
     turtles,
     turtles_animated,
+    override,
+    animation_speed,
     docDimensions: { width: docW, height: docH }
   } = getStore()
+  console.log(animate)
+  console.log(animation)
+  console.log('override',override)
   
+  if (!canvas || !turtlePos || (!animate&&!override)) return
+  patchStore({override: false})
   
-  if (!canvas || !turtlePos) return
  // patchStore({ debounce: true })
   //patchStore({animate:false})
+  //animation: Should the animation run
+  //animate: is there not a animation currently runing
+  //override: if run is clicked, or if the numer is adjusted,  run redraw
+  //TODO: implement override
 
 
   // we want to only work in virtual pixels, and just deal with device pixels in rendering
@@ -245,58 +262,86 @@ const _redraw = (canvas: HTMLCanvasElement,animation = false) => {
   // if(turtles.length === 0) return;
   const { panX, panY, scale } = panZoomParams
   let j = 0;
-  for (const turtle of turtles) {
+  if(!animation||!animate){
+    for (const turtle of turtles) {
    
-    ctx.beginPath()
-
-    for (const polyline of turtle.path) {
-      // let paths = polyline.map(([x, y]) => [
-      //   dpr * (panX + x * scale),
-      //   -(dpr * (-panY + y * scale))
-      // ])
-
-      // paths = lineclip(paths, [0, 0, width, height])
-
-      polyline.forEach((p, i) => {
-        if( !animation||!animate){//if(!animate && !animation)
-          let [x, y] = p
-          x = dpr * (panX + x * scale)
-          y = -(dpr * (-panY + y * scale))
-          if (i === 0) ctx.moveTo(x, y)
-          else ctx.lineTo(x, y)
-          ctx.lineWidth = turtle.style.width
-          ctx.strokeStyle = turtle.style.stroke
-          ctx.stroke()
-          ctx.lineWidth = 1;
-          ctx.fillStyle = turtle.style.fill
-          if (turtle.style.fill !== 'none') ctx.fill()
-        }else{
-      setTimeout(()=>{
-       // patchStore({animate:false})
-        let [x, y] = p
-        x = dpr * (panX + x * scale)
-        y = -(dpr * (-panY + y * scale))
-        if (i === 0) ctx.moveTo(x, y)
-        else ctx.lineTo(x, y)
-        ctx.lineWidth = turtle.style.width
-        ctx.strokeStyle = turtle.style.stroke
-        ctx.stroke()
-        ctx.lineWidth = 1;
-        ctx.fillStyle = turtle.style.fill
-        if (turtle.style.fill !== 'none') ctx.fill()
-        },j) 
-        j+=20
-        
+      ctx.beginPath()
+  
+      for (const polyline of turtle.path) {
+        // let paths = polyline.map(([x, y]) => [
+        //   dpr * (panX + x * scale),
+        //   -(dpr * (-panY + y * scale))
+        // ])
+  
+        // paths = lineclip(paths, [0, 0, width, height])
+  
+        polyline.forEach((p, i) => {
+          if( !animation||!animate){//if(!animate && !animation)
+            let [x, y] = p
+            x = dpr * (panX + x * scale)
+            y = -(dpr * (-panY + y * scale))
+            if (i === 0) ctx.moveTo(x, y)
+            else ctx.lineTo(x, y)
+            ctx.lineWidth = turtle.style.width
+            ctx.strokeStyle = turtle.style.stroke
+            ctx.stroke()
+            ctx.lineWidth = 1;
+            ctx.fillStyle = turtle.style.fill
+            if (turtle.style.fill !== 'none') ctx.fill()
+          }
+          
        
-        }
         
-     
+        })
+      }
       
-      })
+  
+    }
+
+  }else{
+    patchStore({animate:false})
+    for (const turtle of turtles) {
+   
+      ctx.beginPath()
+  
+      for (const polyline of turtle.path) {
+        // let paths = polyline.map(([x, y]) => [
+        //   dpr * (panX + x * scale),
+        //   -(dpr * (-panY + y * scale))
+        // ])
+  
+        // paths = lineclip(paths, [0, 0, width, height])
+  
+        polyline.forEach((p, i) => {
+          setTimeout(()=>{
+            
+             let [x, y] = p
+             x = dpr * (panX + x * scale)
+             y = -(dpr * (-panY + y * scale))
+             if (i === 0) ctx.moveTo(x, y)
+             else ctx.lineTo(x, y)
+             ctx.lineWidth = turtle.style.width
+             ctx.strokeStyle = turtle.style.stroke
+             ctx.stroke()
+             ctx.lineWidth = 1;
+             ctx.fillStyle = turtle.style.fill
+             if (turtle.style.fill !== 'none') ctx.fill()
+             },j) 
+            j+=animation_speed
+            
+          
+       
+        
+        })
+      }
+      
+  
     }
     
-
+       
   }
+
+  
   // if(animate){
   //   for(const turtle of turtles){
   //     ctx.beginPath()

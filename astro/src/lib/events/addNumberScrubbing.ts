@@ -1,8 +1,8 @@
 import { createListener } from '../createListener.js'
-import { getStore } from '../state.js'
+import { getStore, patchStore } from '../state.js'
 import runCode from '../run.ts'
 
-export function addNumberScrubbing() {
+export  function addNumberScrubbing() {
   const listen = createListener(document.body)
 
   const { view } = getStore()
@@ -28,7 +28,7 @@ export function addNumberScrubbing() {
     sigFigs = numStr.split('.')[1]?.length ?? 0
   })
 
-  listen('mousemove', '', e => {
+  listen('mousemove', '', async e => {
     if (dragging === false) return
     if (e.buttons === 0) {
       dragging = false
@@ -52,6 +52,8 @@ export function addNumberScrubbing() {
     })
 
     to = from + newValue.length
+    await patchStore({override:true})
+    patchStore({animate:false})
 
     runCode()
   })
