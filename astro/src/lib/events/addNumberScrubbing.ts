@@ -53,7 +53,7 @@ export  function addNumberScrubbing() {
 
     to = from + newValue.length
     await patchStore({override:true})
-    patchStore({animate:false})
+    await patchStore({animate:false})
 
     runCode()
   })

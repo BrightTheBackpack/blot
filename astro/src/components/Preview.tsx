@@ -276,7 +276,7 @@ const _redraw = (canvas: HTMLCanvasElement,animation = false) => {
         // paths = lineclip(paths, [0, 0, width, height])
   
         polyline.forEach((p, i) => {
-          if( !animation||!animate){//if(!animate && !animation)
+         //if(!animate && !animation)
             let [x, y] = p
             x = dpr * (panX + x * scale)
             y = -(dpr * (-panY + y * scale))
@@ -288,7 +288,7 @@ const _redraw = (canvas: HTMLCanvasElement,animation = false) => {
             ctx.lineWidth = 1;
             ctx.fillStyle = turtle.style.fill
             if (turtle.style.fill !== 'none') ctx.fill()
-          }
+          
           
        
         
