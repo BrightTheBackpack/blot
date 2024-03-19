@@ -54,7 +54,11 @@ export type GlobalState = {
   files: File[],
   cloudFileId: string,
   runCodeInWorker: boolean,
-  codeRunning: boolean
+  codeRunning: boolean,
+  animate: boolean,
+  stoploop: boolean,
+  breakit: boolean,
+  isAnimating: boolean
 }
 
 // setting/initializing state
@@ -85,7 +89,11 @@ const newState: Omit<GlobalState, 'code'> = {
   files: [],
   cloudFileId: "",
   runCodeInWorker: true,
-  codeRunning: false
+  codeRunning: false,
+  animate: false,
+  stoploop: false,
+  breakit: false,
+  isAnimating: false,
 }
 
 export const makeNewState = (): GlobalState => {

@@ -1,19 +1,23 @@
 import { useRef, useEffect, useCallback } from 'preact/hooks'
 import styles from './Preview.module.css'
-import { getStore } from '../state.ts'
+import { getStore ,patchStore} from '../state.ts'
 import CenterToFitIcon from '../ui/CenterToFitIcon.tsx'
 import Button from '../ui/Button.tsx'
 
 import { createListener } from '../createListener.js'
 
 export default function Preview(props: { className?: string }) {
-  const { turtles, docDimensions } = getStore()
+  const { turtles, docDimensions, animate } = getStore()
+  
 
   useEffect(init, [])
 
   useEffect(() => {
     const canvas = document.querySelector('.main-canvas')
-    requestRedraw(canvas)
+    console.log(animate)
+    requestRedraw(canvas,animate)
+    
+    
   })
 
   return (
@@ -73,7 +77,7 @@ function init() {
       panZoomParams.panY =
         fixedPoint.y + (newScale / scale) * (panY - fixedPoint.y)
       panZoomParams.scale = newScale
-
+      patchStore({stoploop:false,breakit:true})
       requestRedraw(canvas)
     },
     { passive: false }
@@ -112,7 +116,7 @@ function init() {
 
     panZoomParams.panX += e.movementX
     panZoomParams.panY += e.movementY
-
+    patchStore({stoploop:false,breakit:true})
     requestRedraw(canvas)
   })
 
@@ -134,7 +138,7 @@ function init() {
       br.width / 2 - (docDimensions.width * panZoomParams.scale) / 2
     panZoomParams.panY =
       br.height / 2 + (docDimensions.height * panZoomParams.scale) / 2
-
+      patchStore({stoploop:false,breakit:true})
     requestRedraw(canvas)
   })
 
@@ -144,7 +148,7 @@ function init() {
     canvas.width = width * dpr
     canvas.height = height * dpr
     setCtxProperties() // setting width/height clears ctx state
-
+    patchStore({stoploop:false,breakit:true})
     requestRedraw(canvas)
   })
 
@@ -161,9 +165,9 @@ const panZoomParams = {
 
 let dpr = typeof window === 'undefined' ? 1 : window.devicePixelRatio || 1
 
-const requestRedraw = (canvas: HTMLCanvasElement) => {
+const requestRedraw = (canvas: HTMLCanvasElement, animate= false) => {
   requestAnimationFrame(() => {
-    _redraw(canvas)
+    _redraw(canvas, animate)
   })
 }
 
@@ -184,22 +188,35 @@ const getCtx = (canvas: HTMLCanvasElement) => {
   return _ctx!
 }
 
-const _redraw = (canvas: HTMLCanvasElement) => {
-  const {
+const _redraw = (canvas: HTMLCanvasElement, animate = false) => {
+  let {
     turtlePos,
     turtles,
+    stoploop,
+  
+   
     docDimensions: { width: docW, height: docH }
   } = getStore()
-  if (!canvas || !turtlePos) return
+  
+  if (!canvas || !turtlePos || stoploop) return
+  patchStore({animate: false,stoploop: true})
+  
 
   // we want to only work in virtual pixels, and just deal with device pixels in rendering
   const width = canvas.width /* / dpr*/
   const height = canvas.height /* / dpr*/
+  console.log(docW, docH)
+  let animationspeed = 200
 
   // turtle canvas
   const ctx = getCtx(canvas)
+  //
+  const arrow = getCtx(canvas)
 
   ctx.clearRect(0, 0, width, height)
+  arrow.clearRect(0,0,width,height)
+  
+
 
   // DRAW TURTLE
   // ctx.beginPath();
@@ -230,34 +247,134 @@ const _redraw = (canvas: HTMLCanvasElement) => {
 
   // turtle path
   // if(turtles.length === 0) return;
+  let j = 0
+  let temp = true;
+  
+  let k = -1;
   const { panX, panY, scale } = panZoomParams
 
-  for (const turtle of turtles) {
+  for (const turtle of turtles) {//[turtle,k] -> turtle
     ctx.beginPath()
+    let t = -1;
+     k++
+    
 
-    for (const polyline of turtle.path) {
+    for (const polyline of turtle.path) {//[polyline,k] -> polyline
+       
+      
       // let paths = polyline.map(([x, y]) => [
       //   dpr * (panX + x * scale),
       //   -(dpr * (-panY + y * scale))
       // ])
 
-
+     
       polyline.forEach((p, i) => {
-        let [x, y] = p
-        x = dpr * (panX + x * scale)
-        y = -(dpr * (-panY + y * scale))
-        if (i === 0) ctx.moveTo(x, y)
-        else ctx.lineTo(x, y)
+      
+      
+          
+       
+        
+        if(animate){
+          setTimeout(() => {
+            t++
+            console.log(polyline.length)
+            console.log('t: ',t,'k: ', k)
+    
+          
+            if(t==polyline.length -1){
+              console.log('ITS FALSE NOW')
+              patchStore({isAnimating:false})
+            }
+            // if(k==turtles.length-1||t==turtle.path.length-1){//just comment this entire if statement out
+            //   patchStore({isAnimating:false})
+            // }
+            
+            let {breakit} = getStore()
+            
+            if(temp && !breakit&& i>1){
+              
+              breakit = !breakit
+            }
+            if(breakit && i==0){
+              temp = true
+            }
+            
+            temp=breakit
+            if(i==0){
+              if(breakit){
+                
+                patchStore({breakit: false})//TODO: MAKE A LOCAL VARIABLE THAT CAN OVERRIDE BREAKIT. THEN REMOVE THIS LINE
+                breakit = false
+              
+                
+             
+              }
+            }
+            if(breakit){
+              
+              
+              j=0
+              animationspeed = 0;
+              
+              return
+            }else{
+       
+            
+            let [x, y] = p
+            
+            
+            x = dpr * (panX + x * scale)
+            y = -(dpr * (-panY + y * scale))
+          //   arrow.strokeRect(
+          //     x,
+          //    y,
+          //    5,
+          //    5,
+          //  )
+          // arrow.clearRect(0,0,width,height)
+          // arrow.beginPath()
+          //  arrow.arc(x,y,2,0,90,false)
+           
+            if (i === 0) ctx.moveTo(x, y)
+            else ctx.lineTo(x, y); console.log('drawn')
+            
+            ctx.lineWidth = turtle.style.width
+            ctx.strokeStyle = turtle.style.stroke
+            ctx.stroke()
+        
+            ctx.lineWidth = 1;
+        
+            ctx.fillStyle = turtle.style.fill
+            if (turtle.style.fill !== 'none') ctx.fill()
+          }
+            
+          },j)
+          j+=animationspeed
+
+        }else{
+          let [x, y] = p
+          x = dpr * (panX + x * scale)
+          y = -(dpr * (-panY + y * scale))
+          if (i === 0) ctx.moveTo(x, y)
+          else ctx.lineTo(x, y); console.log('drawn')
+          ctx.lineWidth = turtle.style.width
+          ctx.strokeStyle = turtle.style.stroke
+          ctx.stroke()
+      
+          ctx.lineWidth = 1;
+      
+          ctx.fillStyle = turtle.style.fill
+          if (turtle.style.fill !== 'none') ctx.fill()
+
+        }
+        
+        
+
+      
       })
+  
     }
 
-    ctx.lineWidth = turtle.style.width
-    ctx.strokeStyle = turtle.style.stroke
-    ctx.stroke()
-
-    ctx.lineWidth = 1;
-
-    ctx.fillStyle = turtle.style.fill
-    if (turtle.style.fill !== 'none') ctx.fill()
+ 
   }
 }

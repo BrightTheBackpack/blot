@@ -66,6 +66,7 @@ export default function Toolbar() {
           </a>
         </h1>
         <RunButton />
+        <RunAnimationButton />
         <div class={dropdownContainer}>
           {needsSaving ? 'file*' : "file"}
           <div class={dropdownClasses + " left-0"}>
@@ -179,6 +180,7 @@ function RunButton() {
       if (e.shiftKey && e.key === 'Enter') {
         e.preventDefault()
         e.stopPropagation()
+        patchStore({stoploop:false})
         await runCode()
       }
     }
@@ -199,7 +201,25 @@ function RunButton() {
     </Button>
   )
 }
+function RunAnimationButton() {
+  // keyboard shortcut - shift+enter
+  
 
+  return (
+    <Button class="relative" variant="ghost" onClick={() => {
+      let {isAnimating} = getStore()
+      if(!isAnimating){
+      patchStore({animate:true,isAnimating:true})//isAnimating:true
+      runCode()}}}>
+      run animation
+      { getStore().codeRunning  && 
+        <div class="absolute mx-auto bottom-0 left-0 right-0 text-xs text-gray-300">
+            ran
+        </div>
+      }
+    </Button>
+  )
+}
 function getCode() {
   const { view } = getStore()
 

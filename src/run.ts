@@ -20,6 +20,8 @@ async function sleep(ms) {
 }
 
 export default async function runCode() {
+  patchStore({stoploop:false,breakit:true})
+  console.log('RUNNING?')
   /*  so you can see some intermediate steps, 
       may be better way to do this 
   */
