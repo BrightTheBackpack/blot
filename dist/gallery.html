@@ -1,0 +1,360 @@
+<!DOCTYPE html><html lang="en"><head>
+        <meta name="description" content="Blot!">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="./styles.css">
+        <script src="https://cdn.tailwindcss.com"></script>
+        
+        <!-- <link rel="stylesheet" href="../tailwind.css"> -->
+        
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script> -->
+
+        <!-- <script leave-it src="./tailwindjit.js"></script> -->
+      </head>
+      <body>
+        
+    
+    <nav class="bg-[--primary] text-white flex items-center justify-between text-lg p-2 sticky top-0 z-50" style="font-family: var(--font-sans);">
+
+      <a href="/" class="flex gap-1 items-center">
+        <img src="/assets/borpheus.svg" class="w-7 translate-x-1 translate-y-[-3px]">
+        <span class="text-2xl font-bold">lot</span>
+      </a>
+
+      <div class="flex gap-4">
+
+        <a href="/editor" class="flex h-full gap-1 items-center hover:opacity-60">
+          <img src="/icons/editor.svg">
+          <span class="hidden sm:block">editor</span>
+        </a>
+
+        <a href="/guides" class="flex h-full gap-1 items-center hover:opacity-60">
+          <img src="/icons/guides.svg">
+          <span class="hidden sm:block">guides</span>
+        </a>
+
+        <a href="/gallery" class="flex h-full gap-1 items-center hover:opacity-60">
+          <img src="/icons/gallery.svg">
+          <span class="hidden sm:block">gallery</span>
+        </a>
+
+        <a href="https://github.com/hackclub/blot/blob/main/docs/ASSEMBLY.md" class="flex h-full gap-1 items-center hover:opacity-60">
+          <img src="/icons/wrench.svg">
+          <span class="hidden sm:block">build guide</span>
+        </a>
+
+        <a href="https://github.com/hackclub/blot" class="flex h-full gap-1 items-center hover:opacity-60" rel="noreferrer" target="_blank">
+          <img src="/icons/github.svg">
+          <span class="hidden sm:block">source</span>
+        </a>
+
+      </div>
+    </nav>
+  
+    
+    <style>
+      body,
+      html {
+        background-size: 40px 40px;
+        background-image: linear-gradient(to right, #ddd 1px, transparent 1px),
+          linear-gradient(to bottom, #ddd 1px, transparent 1px);
+        min-height: 100vh;
+        font-family:
+          'Phantom Sans',
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          sans-serif;
+      }
+
+      .description {
+        padding: 0.3rem;
+        margin-left: 40px;
+        width: 60%;
+        margin: auto;
+        padding-bottom: 30px;
+        text-align: center;
+      }
+
+      .guides-title {
+        font-size: 3rem;
+        font-weight: 700;
+      }
+
+      .guides-sub-title {
+        font-size: 1.7rem;
+        font-weight: 300;
+      }
+
+      #container {
+        margin: 0 auto;
+      }
+
+      #gallery {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      #content {
+        font-size: 1.1rem;
+      }
+
+      .frame {
+        padding: 0;
+        margin: 0.5rem;
+        border: solid 15px #555;
+        box-shadow: -3px -3px 12px #999;
+        width: 30%;
+        min-width: 300px;
+        aspect-ratio: 1;
+        float: left;
+        margin-bottom: 1rem;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: all 0.2s;
+      }
+
+      .frame:hover {
+        transform: scale(101%);
+      }
+
+      .gallery-img {
+        max-width: 100%;
+        width: 100%;
+        max-height: 100%;
+        height: 100%;
+        object-fit: contain;
+        border: 1px solid #aaa;
+      }
+
+      .border {
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+        background-color: white;
+        margin: 0;
+        border: solid 10px white;
+        box-shadow: -3px -3px 12px #999;
+      }
+
+      .gallery-a {
+        box-sizing: border-box;
+        margin: 0;
+        min-width: 0;
+        color: #ec3750;
+        -webkit-text-decoration: underline;
+        text-decoration: underline;
+        text-underline-position: under;
+      }
+
+      a:hover {
+        text-decoration-style: wavy;
+      }
+    </style>
+
+    <div id="container">
+      <div class="description">
+        <div class="guides-title">Gallery</div>
+        <div class="guides-sub-title">
+          A gallery of various art pieces created by Hack Clubbers!
+        </div>
+        <div class="guides-sub-title">
+          Teenagers can submit art to the gallery to get their own Blot. Guide to
+          submission is <a class="gallery-a" href="https://github.com/hackclub/blot/blob/main/docs/GET_A_BLOT.md">here</a>.
+        </div>
+      </div>
+      <div id="gallery">
+        
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/BitMap-AdityaPV/index.js">
+                  <img class="thumbnail gallery-img" alt="BitMap-AdityaPV" src="https://raw.githubusercontent.com/hackclub/blot/main/art/BitMap-AdityaPV/snapshots/sprig.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/BlotGrapher-V205/index.js">
+                  <img class="thumbnail gallery-img" alt="BlotGrapher-V205" src="https://raw.githubusercontent.com/hackclub/blot/main/art/BlotGrapher-V205/snapshots/Snapshot1.jpeg">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/Donut-BrightLi/index.js">
+                  <img class="thumbnail gallery-img" alt="Donut-BrightLi" src="https://raw.githubusercontent.com/hackclub/blot/main/art/Donut-BrightLi/snapshots/snapshot1.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/Emoji" generator_samarpan="" index.js="">
+                  <img class="thumbnail gallery-img" alt="Emoji" generator_samarpan="" src="https://raw.githubusercontent.com/hackclub/blot/main/art/Emoji" snapshots="" 1.png="">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/Mandelbrot-Oskar/index.js">
+                  <img class="thumbnail gallery-img" alt="Mandelbrot-Oskar" src="https://raw.githubusercontent.com/hackclub/blot/main/art/Mandelbrot-Oskar/snapshots/1.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/QR-sam/index.js">
+                  <img class="thumbnail gallery-img" alt="QR-sam" src="https://raw.githubusercontent.com/hackclub/blot/main/art/QR-sam/snapshots/0.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/SpiderWeb-Michelle/index.js">
+                  <img class="thumbnail gallery-img" alt="SpiderWeb-Michelle" src="https://raw.githubusercontent.com/hackclub/blot/main/art/SpiderWeb-Michelle/snapshots/1.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/SudokuGenerator-Ivan/index.js">
+                  <img class="thumbnail gallery-img" alt="SudokuGenerator-Ivan" src="https://raw.githubusercontent.com/hackclub/blot/main/art/SudokuGenerator-Ivan/snapshots/0.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/amongUs-SahilDasari/index.js">
+                  <img class="thumbnail gallery-img" alt="amongUs-SahilDasari" src="https://raw.githubusercontent.com/hackclub/blot/main/art/amongUs-SahilDasari/snapshots/Original.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/blot-ayush/index.js">
+                  <img class="thumbnail gallery-img" alt="blot-ayush" src="https://raw.githubusercontent.com/hackclub/blot/main/art/blot-ayush/snapshots/blot1.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/blotfont-geschmit/index.js">
+                  <img class="thumbnail gallery-img" alt="blotfont-geschmit" src="https://raw.githubusercontent.com/hackclub/blot/main/art/blotfont-geschmit/snapshots/blotfont_logo.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/dexter_sunnyhouse/index.js">
+                  <img class="thumbnail gallery-img" alt="dexter_sunnyhouse" src="https://raw.githubusercontent.com/hackclub/blot/main/art/dexter_sunnyhouse/snapshots/image_3.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/eca-henry/index.js">
+                  <img class="thumbnail gallery-img" alt="eca-henry" src="https://raw.githubusercontent.com/hackclub/blot/main/art/eca-henry/snapshots/eca1.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/flower-sahitid/index.js">
+                  <img class="thumbnail gallery-img" alt="flower-sahitid" src="https://raw.githubusercontent.com/hackclub/blot/main/art/flower-sahitid/snapshots/1.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/fractalTree-maggieClaireBelle/index.js">
+                  <img class="thumbnail gallery-img" alt="fractalTree-maggieClaireBelle" src="https://raw.githubusercontent.com/hackclub/blot/main/art/fractalTree-maggieClaireBelle/snapshots/0.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/fractures-msw/index.js">
+                  <img class="thumbnail gallery-img" alt="fractures-msw" src="https://raw.githubusercontent.com/hackclub/blot/main/art/fractures-msw/snapshots/image_16.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/french-fries-eric/index.js">
+                  <img class="thumbnail gallery-img" alt="french-fries-eric" src="https://raw.githubusercontent.com/hackclub/blot/main/art/french-fries-eric/snapshots/0.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/hilbert_golf-henry/index.js">
+                  <img class="thumbnail gallery-img" alt="hilbert_golf-henry" src="https://raw.githubusercontent.com/hackclub/blot/main/art/hilbert_golf-henry/snapshots/hilbert_golf.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/landscape-henry/index.js">
+                  <img class="thumbnail gallery-img" alt="landscape-henry" src="https://raw.githubusercontent.com/hackclub/blot/main/art/landscape-henry/snapshots/landscape.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/leaf-leo/index.js">
+                  <img class="thumbnail gallery-img" alt="leaf-leo" src="https://raw.githubusercontent.com/hackclub/blot/main/art/leaf-leo/snapshots/leaf.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/linesCircles-yutaro/index.js">
+                  <img class="thumbnail gallery-img" alt="linesCircles-yutaro" src="https://raw.githubusercontent.com/hackclub/blot/main/art/linesCircles-yutaro/snapshots/s1.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/mazeGenerator-Evan/index.js">
+                  <img class="thumbnail gallery-img" alt="mazeGenerator-Evan" src="https://raw.githubusercontent.com/hackclub/blot/main/art/mazeGenerator-Evan/snapshots/10x10_maze.svg">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/raymarching-henry/index.js">
+                  <img class="thumbnail gallery-img" alt="raymarching-henry" src="https://raw.githubusercontent.com/hackclub/blot/main/art/raymarching-henry/snapshots/raymarching1.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/roots-kai/index.js">
+                  <img class="thumbnail gallery-img" alt="roots-kai" src="https://raw.githubusercontent.com/hackclub/blot/main/art/roots-kai/snapshots/roots.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/self_portrait-kieran/index.js">
+                  <img class="thumbnail gallery-img" alt="self_portrait-kieran" src="https://raw.githubusercontent.com/hackclub/blot/main/art/self_portrait-kieran/snapshots/snapshot-1.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/square-disarray-leo/index.js">
+                  <img class="thumbnail gallery-img" alt="square-disarray-leo" src="https://raw.githubusercontent.com/hackclub/blot/main/art/square-disarray-leo/snapshots/0.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/sunset-ameya/index.js">
+                  <img class="thumbnail gallery-img" alt="sunset-ameya" src="https://raw.githubusercontent.com/hackclub/blot/main/art/sunset-ameya/snapshots/sample1.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/tree-leo/index.js">
+                  <img class="thumbnail gallery-img" alt="tree-leo" src="https://raw.githubusercontent.com/hackclub/blot/main/art/tree-leo/snapshots/tree.png">
+                </a>
+              </div>
+             
+              <div class="frame">
+                <a class="border gallery-a" href="/editor?src=https://raw.githubusercontent.com/hackclub/blot/main/art/word_search-scott_c/index.js">
+                  <img class="thumbnail gallery-img" alt="word_search-scott_c" src="https://raw.githubusercontent.com/hackclub/blot/main/art/word_search-scott_c/snapshots/snapshot01.png">
+                </a>
+              </div>
+            
+      </div>
+    </div>
+   
+  
+  
+      
+    
+
+  </body></html>
