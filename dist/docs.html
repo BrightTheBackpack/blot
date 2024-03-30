@@ -1,0 +1,373 @@
+<!DOCTYPE html><html lang="en"><head>
+        <meta name="description" content="Blot!">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="./styles.css">
+        <script src="https://cdn.tailwindcss.com"></script>
+        
+        <!-- <link rel="stylesheet" href="../tailwind.css"> -->
+        
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script> -->
+
+        <!-- <script leave-it src="./tailwindjit.js"></script> -->
+      </head>
+      <body>
+        
+    
+    <nav class="bg-[--primary] text-white flex items-center justify-between text-lg p-2 sticky top-0 z-50" style="font-family: var(--font-sans);">
+
+      <a href="/" class="flex gap-1 items-center">
+        <img src="/assets/borpheus.svg" class="w-7 translate-x-1 translate-y-[-3px]">
+        <span class="text-2xl font-bold">lot</span>
+      </a>
+
+      <div class="flex gap-4">
+
+        <a href="/editor" class="flex h-full gap-1 items-center hover:opacity-60">
+          <img src="/icons/editor.svg">
+          <span class="hidden sm:block">editor</span>
+        </a>
+
+        <a href="/guides" class="flex h-full gap-1 items-center hover:opacity-60">
+          <img src="/icons/guides.svg">
+          <span class="hidden sm:block">guides</span>
+        </a>
+
+        <a href="/gallery" class="flex h-full gap-1 items-center hover:opacity-60">
+          <img src="/icons/gallery.svg">
+          <span class="hidden sm:block">gallery</span>
+        </a>
+
+        <a href="https://github.com/hackclub/blot/blob/main/docs/ASSEMBLY.md" class="flex h-full gap-1 items-center hover:opacity-60">
+          <img src="/icons/wrench.svg">
+          <span class="hidden sm:block">build guide</span>
+        </a>
+
+        <a href="https://github.com/hackclub/blot" class="flex h-full gap-1 items-center hover:opacity-60" rel="noreferrer" target="_blank">
+          <img src="/icons/github.svg">
+          <span class="hidden sm:block">source</span>
+        </a>
+
+      </div>
+    </nav>
+  
+    
+    <style>
+      code {
+        background: #eaeaea;
+        border-radius: 0.25rem;
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+      }
+
+      pre {
+        background: #eaeaea;
+        border-radius: 0.25rem;
+        margin-top: .5rem;
+        margin-bottom: .5rem;
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+      }
+
+      .md-container {
+        max-width: 800px;
+        padding: 1rem;
+        margin: auto;
+      }
+    </style>
+    <div class="md-container">
+      <h1 class="text-3xl font-sans font-semibold text-gray-800 py-2">The Toolkit</h1><p class="font-sans">This is the drawing library available in the Blot editor.</p><hr>
+<h2 class="text-2xl font-sans font-semibold text-gray-800 py-2">Environment Affecting</h2><p class="font-sans">These functions set properties of the Blot drawing environment.</p><h3 id="setDocDimensions" class="text-xl font-sans font-semibold text-blue-500 py-2">setDocDimensions(width, height)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>width</code> (number): The width of the document.</li>
+<li><code>height</code> (number): The height of the document.</li>
+<p class="font-sans"><strong>Returns:</strong> Nothing.</p><p class="font-sans"><strong>Description:</strong> </p><p class="font-sans">Sets the dimensions of the drawing document.
+This function initializes the size of the drawing area, it's used as a visual cue.
+The workarea of the Blot is 125mm by 125mm. 
+It is usually one of the first functions called when setting up a new drawing. 
+The bottom left corner is 0,0. 
+The units are millimeters (mm).</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-title function_">setDocDimensions</span>(<span class="hljs-number">800</span>, <span class="hljs-number">600</span>);</code></pre><h3 id="drawLines" class="text-xl font-sans font-semibold text-blue-500 py-2">drawLines(polylines, options = { fill, stroke, width })</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines</code> ([number, number][][]): A list of polylines</li>
+<li><code>options</code> (object): Optional values which can be passed to the drawing function</li><li><code>fill</code> (string): Add color to the inside of polylines</li>
+<li><code>stroke</code> (string): Add color along the path of polylines</li>
+<li><code>width</code> (number): Change the width of polylines; the value is in pixels</li>
+
+<p class="font-sans"><strong>Returns:</strong> Nothing.</p><p class="font-sans"><strong>Description:</strong></p><p class="font-sans">Draws a copy of the polylines passed onto the screen. 
+Your line drawings are best represented by not assigning any optional properties.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-title function_">drawLines</span>([
+  [
+    [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>],
+    [<span class="hljs-number">100</span>, <span class="hljs-number">100</span>]
+  ]
+]);</code></pre><h2 class="text-2xl font-sans font-semibold text-gray-800 py-2">Importing the Toolkit</h2><p class="font-sans">The functions below are available in the <code>toolkit</code> object.</p><pre class="overflow-x-auto"><code><span class="hljs-comment">// like so</span>
+toolkit.<span class="hljs-title function_">scale</span>(...)</code></pre><p class="font-sans"><code>toolkit</code> is also available as the abbreviated <code>tk</code>. This is <strong>the recommended way to reference the toolkit</strong>.</p><pre class="overflow-x-auto"><code><span class="hljs-comment">// like so</span>
+tk.<span class="hljs-title function_">scale</span>(...)</code></pre><p class="font-sans">You can also destructure the functions from <code>toolkit</code>.</p><pre class="overflow-x-auto"><code><span class="hljs-comment">// all imports</span>
+<span class="hljs-keyword">const</span> { <span class="hljs-title class_">Turtle</span>, trim, merge, cut, cover, rotate, scale, translate, originate, iteratePoints, pointInside, resample, join, copy, union, difference, intersection, xor, getAngle, getPoint, getNormal, bounds, nurbs, catmullRom, svgToPolylines, rand, setRandSeed, randInRange, randIntInRange, noise } = toolkit;</code></pre><pre class="overflow-x-auto"><code><span class="hljs-comment">// common imports</span>
+<span class="hljs-keyword">const</span> { <span class="hljs-title class_">Turtle</span>, cut, cover, copy, rotate, scale, translate, originate, iteratePoints, resample, join, getAngle, getNormal, bounds, rand, setRandSeed, randInRange, noise, nurbs } = toolkit;</code></pre><h2 class="text-2xl font-sans font-semibold text-gray-800 py-2">Modify Polylines</h2><p class="font-sans">These functions modify a polyline that is passed as a first argument.</p><h3 id="iteratePoints" class="text-xl font-sans font-semibold text-blue-500 py-2">iteratePoints(polylines, callback)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines</code> ([number, number][][]): An array of polylines to iterate over.</li>
+<li><code>callback</code> (Function): A function that is called for each point with parameters:</li><li><code>pt</code> ([number, number]): The current point.</li>
+<li><code>t</code> (number): The normalized position of the point in the polyline.</li>
+
+<p class="font-sans"><strong>Returns:</strong> 
+The original array of polylines with the points modified by the callback function. 
+Points are mutated in place.</p><p class="font-sans"><strong>Description:</strong></p><p class="font-sans">This function iterates over each point in a set of polylines. 
+The provided callback function can modify each point by returning a new point, 
+split the polyline by returning <code>"BREAK"</code>, 
+or remove a point by returning <code>"REMOVE"</code>. 
+The callback receives the current point and its normalized position within the polyline. 
+Modifications are applied after all points are iterated through.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> polylines = [[[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">20</span>]]];
+<span class="hljs-keyword">const</span> modifiedPolylines = tk.<span class="hljs-title function_">iteratePoints</span>(polylines, <span class="hljs-function">(<span class="hljs-params">pt, t</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> [x, y] = pt;
+  <span class="hljs-comment">// Move each point up by 5mm</span>
+  <span class="hljs-keyword">return</span> [x, y + <span class="hljs-number">5</span>];
+});
+
+<span class="hljs-comment">// or </span>
+
+<span class="hljs-keyword">const</span> modifiedPolylines2 = tk.<span class="hljs-title function_">iteratePoints</span>(polylines, <span class="hljs-function">(<span class="hljs-params">pt, t</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> [x, y] = pt;
+
+  <span class="hljs-keyword">if</span> (t &lt; <span class="hljs-number">.2</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"REMOVE"</span>;
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-number">.5</span> &gt; <span class="hljs-title function_">rand</span>()) {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"BREAK"</span>;
+  }
+
+  <span class="hljs-comment">// Move each point up by 5mm</span>
+  <span class="hljs-keyword">return</span> [x, y + <span class="hljs-number">5</span>];
+});</code></pre><h3 id="scale" class="text-xl font-sans font-semibold text-blue-500 py-2">scale(polylines, scale, origin = [0, 0])</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines</code> ([number, number][][]): An array of polylines to be scaled.</li>
+<li><code>scale</code> (number | [number, number]): The scale factor to apply. If a single number is provided, the scale is uniform across both axes. If an array is provided, it specifies separate scale factors for the x (<code>scaleX</code>) and y (<code>scaleY</code>) dimensions.</li>
+<li><code>origin</code> ([number, number], optional): The point around which the scaling is performed. Defaults to bounding box center if not specified.</li>
+<p class="font-sans"><strong>Returns:</strong> A new array of polylines that have been scaled according to the specified parameters.</p><p class="font-sans"><strong>Description:</strong></p><p class="font-sans">Scales the provided polylines by a specified factor, 
+optionally around a custom origin point. 
+This can uniformly or non-uniformly transform the size of the polylines.
+It supports both uniform scaling (where the shape's proportions are maintained) and non-uniform scaling (where the shape's proportions can change). 
+The function allows for scaling around a specific origin point. 
+The default origin is the center of the bounding box of the shape.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> polylines = [
+  [[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>]]
+];
+
+<span class="hljs-comment">// Scale uniformly by a factor of 2</span>
+<span class="hljs-keyword">const</span> uniformlyScaled = tk.<span class="hljs-title function_">scale</span>(polylines, <span class="hljs-number">2</span>);
+
+<span class="hljs-comment">// Scale non-uniformly (x by 2, y by 3)</span>
+<span class="hljs-keyword">const</span> nonUniformlyScaled = tk.<span class="hljs-title function_">scale</span>(polylines, [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);
+
+<span class="hljs-comment">// Scale uniformly around a custom origin (5, 5)</span>
+<span class="hljs-keyword">const</span> customOriginScaled = tk.<span class="hljs-title function_">scale</span>(polylines, <span class="hljs-number">2</span>, [<span class="hljs-number">5</span>, <span class="hljs-number">5</span>]);</code></pre><h3 id="rotate" class="text-xl font-sans font-semibold text-blue-500 py-2">rotate(polylines, degrees, origin = [0, 0])</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines</code> ([number, number][][]): An array of polylines to be rotated.</li>
+<li><code>degrees</code> (number): The angle in degrees by which the polylines should be rotated. Positive values rotate the shape clockwise, while negative values rotate it counterclockwise.</li>
+<li><code>origin</code> ([number, number], optional): The point around which the rotation will occur. Defaults to bounding box center if not specified.</li>
+<p class="font-sans"><strong>Returns:</strong> The modified array of polylines after rotation.</p><p class="font-sans"><strong>Description:</strong></p><p class="font-sans">Rotates the provided polylines around a specified origin point by a given number of degrees. </p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> polylines = [[[<span class="hljs-number">10</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">20</span>], [<span class="hljs-number">30</span>, <span class="hljs-number">10</span>]]];
+<span class="hljs-keyword">const</span> degrees = <span class="hljs-number">45</span>; <span class="hljs-comment">// Rotate 45 degrees clockwise</span>
+
+tk.<span class="hljs-title function_">rotate</span>(polylines, degrees);
+tk.<span class="hljs-title function_">rotate</span>(polylines, degrees, [<span class="hljs-number">45</span>, <span class="hljs-number">0</span>]);</code></pre><h3 id="translate" class="text-xl font-sans font-semibold text-blue-500 py-2">translate(polylines, [dx, dy], origin = [0, 0])</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines</code> ([number, number][][]): An array of polylines to be translated.</li>
+<li><code>[dx, dy]</code> ([number, number]): The distance to move the polylines along the x (dx) and y (dy) axes.</li>
+<li><code>origin</code> ([number, number], optional): The point from which the translation is performed. Defaults to <code>[0, 0]</code> if not specified.</li>
+<p class="font-sans"><strong>Description:</strong></p><p class="font-sans">Translates (moves) the provided polylines by a specified distance along the x and y axes, optionally from a custom origin point. This modification is applied directly to the provided array of polylines.
+The <code>translate</code> function shifts the position of the given polylines without altering their shape or orientation. It's useful for repositioning drawings within a graphical space or relative to other elements.</p><p class="font-sans"><strong>Returns:</strong> The modified array of polylines after translation.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> polylines = [[[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">5</span>]]];
+tk.<span class="hljs-title function_">translate</span>(polylines, [<span class="hljs-number">5</span>, <span class="hljs-number">10</span>]);</code></pre><h3 id="originate" class="text-xl font-sans font-semibold text-blue-500 py-2">originate(polylines)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines</code> ([number, number][][]): An array of polylines to be centered.</li>
+<p class="font-sans"><strong>Returns:</strong> The modified array of polylines after centering at the coordinate origin.</p><p class="font-sans"><strong>Description:</strong></p><p class="font-sans">Moves the center of the provided polylines to the coordinate origin ([0, 0]). 
+This modification is applied directly to the provided array of polylines.
+The <code>originate</code> function recalculates the bounding box of the given polylines and translates them such that their center aligns with the origin of the coordinate system. This is particularly useful for standardizing the position of shapes before applying transformations like rotation or scaling.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> polylines = [[[<span class="hljs-number">10</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">20</span>], [<span class="hljs-number">30</span>, <span class="hljs-number">10</span>]]];
+tk.<span class="hljs-title function_">originate</span>(polylines);</code></pre><h3 id="resample" class="text-xl font-sans font-semibold text-blue-500 py-2">resample(polylines, sampleRate)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines</code> ([number, number][][]): An array of polylines to be resampled.</li>
+<li><code>sampleRate</code> (number): The new distance between adjacent points on the polyline.</li>
+<p class="font-sans"><strong>Returns:</strong> The modified array of polylines after resampling.</p><p class="font-sans"><strong>Description:</strong>
+Adjusts the density of points along the polylines according to a specified sample rate, effectively changing the resolution of the shape. This modification is applied directly to the provided array of polylines.
+The <code>resample</code> function is used to either increase or decrease the number of points along a polyline, based on the specified sample rate.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> polylines = [[[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">5</span>], [<span class="hljs-number">30</span>, <span class="hljs-number">10</span>]]];
+tk.<span class="hljs-title function_">resample</span>(polylines, <span class="hljs-number">5</span>);</code></pre><h3 id="simplify" class="text-xl font-sans font-semibold text-blue-500 py-2">simplify(polylines, tolerance, highQuality = false)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines</code> ([number, number][][]): An array of polylines to be simplified.</li>
+<li><code>tolerance</code> (number): The maximum allowed deviation from the original line.</li>
+<li><code>highQuality</code> (boolean, optional): If true, uses a slower algorithm that ensures a higher quality of simplification. Defaults to false.</li>
+<p class="font-sans"><strong>Returns:</strong> The modified array of polylines after simplification.</p><p class="font-sans"><strong>Description:</strong></p><p class="font-sans">Reduces the number of points in a polyline while retaining its general shape, based on a specified tolerance. This modification is applied directly to the provided array of polylines.
+The <code>simplify</code> function is particularly useful for reducing the complexity of polyline shapes, which can be beneficial for performance optimization in rendering and for creating a more abstract visual appearance.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> polylines = [[[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">5</span>, <span class="hljs-number">5</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">15</span>, <span class="hljs-number">15</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">20</span>]]];
+tk.<span class="hljs-title function_">simplify</span>(polylines, <span class="hljs-number">1</span>);</code></pre><h3 id="trim" class="text-xl font-sans font-semibold text-blue-500 py-2">trim(polylines, tStart, tEnd)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines</code> ([number, number][][]): An array of polylines to be trimmed.</li>
+<li><code>tStart</code> (number): The start position of the trim, normalized to the range [0, 1].</li>
+<li><code>tEnd</code> (number): The end position of the trim, normalized to the range [0, 1].</li>
+<p class="font-sans"><strong>Returns:</strong> The modified array of polylines after trimming.</p><p class="font-sans"><strong>Description:</strong></p><p class="font-sans">Trims the polylines to a specified range, based on normalized positions along their length. This modification is applied directly to the provided array of polylines.
+The <code>trim</code> function reduces the length of each polyline according to the specified start and end positions. This is useful for cutting away unwanted sections of a polyline or isolating specific portions of interest.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> polylines = [[[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">20</span>]]];
+tk.<span class="hljs-title function_">trim</span>(polylines, <span class="hljs-number">0.25</span>, <span class="hljs-number">0.75</span>);</code></pre><h3 id="merge" class="text-xl font-sans font-semibold text-blue-500 py-2">merge(polylines)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines</code> ([number, number][][]): An array of polylines to be merged.</li>
+<p class="font-sans"><strong>Returns:</strong> The modified array containing a single polyline after merging.</p><p class="font-sans"><strong>Description:</strong></p><p class="font-sans">Merges multiple polylines with overlapping endpoints into a single polyline. This modification is applied directly to the provided array of polylines.
+The <code>merge</code> function combines several polyline paths into one continuous path, effectively joining them end-to-end. This is useful for creating single, coherent shapes out of multiple segments.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> polyline1 = [[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>]];
+<span class="hljs-keyword">const</span> polyline2 = [[<span class="hljs-number">10</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">20</span>]];
+<span class="hljs-keyword">const</span> polylines = [polyline1, polyline2];
+tk.<span class="hljs-title function_">merge</span>(polylines);</code></pre><h3 id="join" class="text-xl font-sans font-semibold text-blue-500 py-2">join(polylines0, ...morePolylines)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines0</code> ([number, number][][]): The primary array of polylines to which others will be joined.</li>
+<li><code>...morePolylines</code> ([number, number][][]): Additional arrays of polylines to be joined to the first.</li>
+<p class="font-sans"><strong>Returns:</strong> The modified first array of polylines after joining.</p><p class="font-sans"><strong>Description:</strong>
+Joins multiple arrays of polylines into a single array, concatenating them. 
+This modification is applied directly to the first provided array of polylines.
+The <code>join</code> function is used to concatenate multiple arrays of polylines into a single array, allowing for the combination of separate polyline collections into one.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> polylines1 = [[[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>]]];
+<span class="hljs-keyword">const</span> polylines2 = [[[<span class="hljs-number">20</span>, <span class="hljs-number">20</span>], [<span class="hljs-number">30</span>, <span class="hljs-number">30</span>]]];
+tk.<span class="hljs-title function_">join</span>(polylines1, polylines2);</code></pre><h3 id="copy" class="text-xl font-sans font-semibold text-blue-500 py-2">copy(polylines)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines</code> ([number, number][][]): An array of polylines to be copied.</li>
+<p class="font-sans"><strong>Returns:</strong> A new array of polylines that is a deep copy of the provided polylines.</p><p class="font-sans"><strong>Description:</strong></p><p class="font-sans">Creates a deep copy of the provided polylines. 
+This function does not modify the provided array but returns a new one that is a copy.
+The <code>copy</code> function is useful when you need to duplicate polylines without altering the original set, allowing for non-destructive transformations or manipulations on the copy.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> originalPolylines = [[[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>]]];
+<span class="hljs-keyword">const</span> copiedPolylines = tk.<span class="hljs-title function_">copy</span>(originalPolylines);</code></pre><h3 id="cut" class="text-xl font-sans font-semibold text-blue-500 py-2">cut(polylines0, polylines1)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines0</code> ([number, number][][]): The primary array of polylines to be cut.</li>
+<li><code>polylines1</code> ([number, number][][]): The array of polylines used as the cutter.</li>
+<p class="font-sans"><strong>Returns:</strong> The modified <code>polylines0</code> array after being cut by <code>polylines1</code>.</p><p class="font-sans"><strong>Description:</strong></p><p class="font-sans">Removes all points of the <code>basePolylines</code> outside of the <code>cuttingPolylines</code>.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> polylinesToCut = [[[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">0</span>]]];
+<span class="hljs-keyword">const</span> cuttingPolylines = [[[<span class="hljs-number">5</span>, <span class="hljs-number">5</span>], [<span class="hljs-number">15</span>, <span class="hljs-number">5</span>]]];
+tk.<span class="hljs-title function_">cut</span>(polylinesToCut, cuttingPolylines);</code></pre><h3 id="cover" class="text-xl font-sans font-semibold text-blue-500 py-2">cover(polylines0, polylines1)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines0</code> ([number, number][][]): The primary array of polylines to be covered.</li>
+<li><code>polylines1</code> ([number, number][][]): The array of polylines used to cover the first.</li>
+<p class="font-sans"><strong>Returns:</strong> The modified <code>polylines0</code> array after being covered by <code>polylines1</code>.</p><p class="font-sans"><strong>Description:</strong></p><p class="font-sans">Removes all points of the <code>basePolylines</code> inside of the <code>coveringPolylines</code>.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> basePolylines = [[[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">0</span>]]];
+<span class="hljs-keyword">const</span> coveringPolylines = [[[<span class="hljs-number">5</span>, -<span class="hljs-number">5</span>], [<span class="hljs-number">15</span>, <span class="hljs-number">15</span>]]];
+tk.<span class="hljs-title function_">cover</span>(basePolylines, coveringPolylines);</code></pre><h3 id="union" class="text-xl font-sans font-semibold text-blue-500 py-2">union(polylines0, polylines1)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines0</code> ([number, number][][]): The first array of polylines.</li>
+<li><code>polylines1</code> ([number, number][][]): The second array of polylines.</li>
+<p class="font-sans"><strong>Returns:</strong> The modified <code>polylines0</code> array after union with <code>polylines1</code>.</p><p class="font-sans"><strong>Description:</strong></p><p class="font-sans">Takes the boolean union of both sets of polylines.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> subjectPolylines = [[[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">0</span>]]];
+<span class="hljs-keyword">const</span> clippingPolylines = [[[<span class="hljs-number">10</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">30</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">20</span>, -<span class="hljs-number">10</span>]]];
+tk.<span class="hljs-title function_">union</span>(subjectPolylines, clippingPolylines);</code></pre><h3 id="difference" class="text-xl font-sans font-semibold text-blue-500 py-2">difference(polylines0, polylines1)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines0</code> ([number, number][][]): The primary array of polylines to be modified.</li>
+<li><code>polylines1</code> ([number, number][][]): The array of polylines used to subtract from the first.</li>
+<p class="font-sans"><strong>Returns:</strong> The modified <code>polylines0</code> array after the difference operation with <code>polylines1</code>.</p><p class="font-sans"><strong>Description:</strong></p><p class="font-sans">Subtracts the <code>clippingPolylines</code> from the <code>subjectPolylines</code>.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> subjectPolylines = [[[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">20</span>]]];
+<span class="hljs-keyword">const</span> clippingPolylines = [[[<span class="hljs-number">0</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">10</span>, -<span class="hljs-number">10</span>]]];
+tk.<span class="hljs-title function_">difference</span>(subjectPolylines, clippingPolylines);</code></pre><h3 id="intersection" class="text-xl font-sans font-semibold text-blue-500 py-2">intersection(polylines0, polylines1)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines0</code> ([number, number][][]): The first array of polylines.</li>
+<li><code>polylines1</code> ([number, number][][]): The second array of polylines.</li>
+<p class="font-sans"><strong>Returns:</strong> The modified <code>polylines0</code> array after finding the intersection with <code>polylines1</code>.</p><p class="font-sans"><strong>Description:</strong></p><p class="font-sans">Modifies the <code>subjectPolylines</code> to only the part that intersects with the <code>clippingPolylines</code>.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> subjectPolylines = [[[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">0</span>]]];
+<span class="hljs-keyword">const</span> clippingPolylines = [[[<span class="hljs-number">0</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">10</span>]]];
+tk.<span class="hljs-title function_">intersection</span>(subjectPolylines, clippingPolylines);</code></pre><h3 id="xor" class="text-xl font-sans font-semibold text-blue-500 py-2">xor(polylines0, polylines1)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines0</code> ([number, number][][]): The first array of polylines.</li>
+<li><code>polylines1</code> ([number, number][][]): The second array of polylines.</li>
+<p class="font-sans"><strong>Returns:</strong> The modified <code>polylines0</code> array after the xor operation with <code>polylines1</code>.</p><p class="font-sans"><strong>Description:</strong></p><p class="font-sans">Performs an exclusive or operation on two sets of polylines, leaving only the parts of each set that do not overlap with the other. This operation modifies the first set of polylines directly.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> polylines0 = [[[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">0</span>]]];
+<span class="hljs-keyword">const</span> polylines1 = [[[<span class="hljs-number">0</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">10</span>]]];
+tk.<span class="hljs-title function_">xor</span>(polylines0, polylines1);</code></pre><h2 class="text-2xl font-sans font-semibold text-gray-800 py-2">Get Data From Polylines</h2><p class="font-sans">These functions take polylines and return other values. 
+They do not modify the polylines.</p><h3 id="getAngle" class="text-xl font-sans font-semibold text-blue-500 py-2">getAngle(polylines, t: [0 to 1])</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines</code> ([number, number][][]): An array of polylines representing a shape.</li>
+<li><code>t</code> (number): Normalized position along the polylines where the angle is calculated. Should be between 0 and 1.</li>
+<p class="font-sans"><strong>Returns:</strong> The angle in degrees at the specified point along the polylines.</p><p class="font-sans"><strong>Description:</strong> </p><p class="font-sans">Calculates the angle in degrees at the specified point along the polylines. 
+This function determines the angle of the tangent line to the shape at the given position <code>t</code>.</p><h3 id="getPoint" class="text-xl font-sans font-semibold text-blue-500 py-2">getPoint(polylines, t: [0 to 1])</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines</code> ([number, number][][]): An array of polylines representing a shape.</li>
+<li><code>t</code> (number): Normalized position along the polylines where the point is obtained. Should be between 0 and 1.</li>
+<p class="font-sans"><strong>Returns:</strong> The point coordinates <code>[x, y]</code> at the specified position along the polylines.</p><p class="font-sans"><strong>Description:</strong> </p><p class="font-sans">Returns the coordinates of the point at the specified position <code>t</code> along the polylines. </p><h3 id="getNormal" class="text-xl font-sans font-semibold text-blue-500 py-2">getNormal(polylines, t: [0 to 1])</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines</code> ([number, number][][]): An array of polylines representing a shape.</li>
+<li><code>t</code> (number): Normalized position along the polylines where the normal vector is obtained. Should be between 0 and 1.</li>
+<p class="font-sans"><strong>Returns:</strong> The normal vector <code>[x, y]</code> at the specified position along the polylines.</p><p class="font-sans"><strong>Description:</strong> </p><p class="font-sans">Calculates the normal vector at the specified point along the polylines. 
+The normal vector is a vector that is perpendicular to the tangent line at the given position <code>t</code>. </p><h3 id="pointInside" class="text-xl font-sans font-semibold text-blue-500 py-2">pointInside(polylines, pt)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines</code> ([number, number][][]): An array of polylines representing a shape.</li>
+<li><code>pt</code> ([number, number]): The point <code>[x, y]</code> to test for containment within the shape.</li>
+<p class="font-sans"><strong>Returns:</strong> </p><li><code>true</code> if the point is inside the shape.</li>
+<li><code>false</code> if the point is outside the shape.</li>
+<p class="font-sans"><strong>Description:</strong> </p><p class="font-sans">Determines whether a point lies inside the provided shape defined by the polylines. 
+This function is useful for collision detection, hit testing, or determining containment of points within shapes.</p><h3 id="bounds" class="text-xl font-sans font-semibold text-blue-500 py-2">bounds(polylines)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>polylines</code> ([number, number][][]): An array of polylines representing a shape.</li>
+<p class="font-sans"><strong>Returns:</strong> 
+An object containing bounding box information:</p><li><code>xMin</code>, <code>xMax</code>: The minimum and maximum x-coordinates of the bounding box.</li>
+<li><code>yMin</code>, <code>yMax</code>: The minimum and maximum y-coordinates of the bounding box.</li>
+<li><code>lt</code>, <code>ct</code>, <code>rt</code>, <code>lc</code>, <code>cc</code>, <code>rc</code>, <code>lb</code>, <code>cb</code>, <code>rb</code>: Coordinates of the bounding box corners (left-top, center-top, right-top, left-center, center-center, right-center, left-bottom, center-bottom, right-bottom).</li>
+<li><code>width</code>, <code>height</code>: Width and height of the bounding box.</li>
+<p class="font-sans"><strong>Description:</strong> </p><p class="font-sans">Calculates the bounding box of the provided shape defined by the polylines. </p><p class="font-sans">They are arranged in this configuration around the bounding box of the polylines</p><pre class="overflow-x-auto"><code>lt--ct--rt
+ |   |   |
+lc--cc--rc
+ |   |   | 
+lb--cb--rb</code></pre><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> polylines = [[[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">0</span>]]];
+<span class="hljs-keyword">const</span> boundingBox = tk.<span class="hljs-title function_">bounds</span>(polylines);
+<span class="hljs-comment">/*
+returns { 
+  xMin, xMax, 
+  yMin, yMax, 
+  lt, ct, rt, 
+  lc, cc, rc,
+  lb, cb, rb,
+  width, height
+}
+*/</span>
+
+<span class="hljs-keyword">const</span> center = boundingBox.<span class="hljs-property">cc</span>;</code></pre><h2 class="text-2xl font-sans font-semibold text-gray-800 py-2">Generate Polylines</h2><p class="font-sans">A collection of functions and classes for creating polylines.</p><h3 id="Turtl" class="text-xl font-sans font-semibold text-blue-500 py-2">Turtle</h3><p class="font-sans">A <code>Turtle</code> class represents a cursor that moves around a canvas to draw shapes. It is inspired by the Logo programming language and can be used to create intricate designs and patterns programmatically.</p><p class="font-sans"><strong>Methods:</strong></p><li><code>forward(distance)</code> Moves the turtle forward by the specified distance, drawing a line if the pen is down.</li>
+<li><code>arc(angle, radius)</code> Draws an arc with the specified angle and radius from the current position.</li>
+<li><code>goTo([x, y])</code> Moves the turtle to the specified coordinates, drawing a line if the pen is down.</li>
+<li><code>jump([x, y])</code> Moves the turtle to the specified coordinates without drawing a line.</li>
+<li><code>right(angle)</code> Rotates the turtle to the right by the specified angle.</li>
+<li><code>left(angle)</code> Rotates the turtle to the left by the specified angle.</li>
+<li><code>setAngle(angle)</code> Sets the absolute angle of the turtle's orientation.</li>
+<li><code>up()</code> Lifts the pen so that moving the turtle does not draw lines.</li>
+<li><code>down()</code> Lowers the pen so that moving the turtle draws lines.</li>
+<li><code>copy()</code> Creates a copy of the turtle's current state.</li>
+<li><code>apply(fn)</code> Takes a function that receives the turtle as an argument and applies custom operations.</li>
+<li><code>lines()</code> Returns a copy of the Turtle's path.</li>
+<p class="font-sans"><strong>Properties:</strong></p><li><code>pos</code> The current position of the turtle as an <code>[x, y]</code> array.</li>
+<li><code>angle</code> The current orientation angle of the turtle.</li>
+<li><code>path</code> The path drawn by the turtle, represented as an array of polylines <code>[number, number][][]</code>.</li>
+<li><code>drawing</code> A boolean indicating whether the turtle is currently drawing.</li>
+<p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code><span class="hljs-keyword">const</span> myTurtle = <span class="hljs-keyword">new</span> tk.<span class="hljs-title class_">Turtle</span>()
+  .<span class="hljs-title function_">down</span>()
+  .<span class="hljs-title function_">forward</span>(<span class="hljs-number">100</span>)
+  .<span class="hljs-title function_">right</span>(<span class="hljs-number">90</span>)
+  .<span class="hljs-title function_">forward</span>(<span class="hljs-number">100</span>);
+<span class="hljs-keyword">const</span> position = myTurtle.<span class="hljs-property">pos</span>; <span class="hljs-comment">// Gets the current position of the turtle</span>
+<span class="hljs-keyword">const</span> path = myTurtle.<span class="hljs-property">path</span>; <span class="hljs-comment">// Gets the path drawn by the turtle, use this to get polylines</span></code></pre><h3 id="catmullRom" class="text-xl font-sans font-semibold text-blue-500 py-2">catmullRom(points, steps = 1000)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>points</code> ([number, number][]): An array of points through which the curve should pass.</li>
+<li><code>steps</code> (number, optional): The number of steps to divide the curve into. Defaults to 1000.</li>
+<p class="font-sans"><strong>Returns:</strong> A polyline ([number, number][]) that represents the Catmull-Rom spline through the given points.</p><p class="font-sans"><strong>Description:</strong> </p><p class="font-sans">Generates a Catmull-Rom spline, which is a type of interpolating curve, passing through a series of control points. The <code>steps</code> parameter controls the smoothness of the curve, with higher values resulting in a more detailed curve.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code>tk.<span class="hljs-title function_">catmullRom</span>([[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">15</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">5</span>]], <span class="hljs-number">100</span>); <span class="hljs-comment">// Returns a polyline with 100 points forming a smooth curve through the specified points</span></code></pre><h3 id="nurbs" class="text-xl font-sans font-semibold text-blue-500 py-2">nurbs(points, ops = { steps: 100, degree: 2})</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>points</code> ([number, number][]): An array of control points for the NURBS curve.</li>
+<li><code>ops</code> (object, optional): Configuration options for the NURBS curve.</li><li><code>steps</code> (number): The number of steps to divide the curve into. Defaults to 100.</li>
+<li><code>degree</code> (number): The degree of the NURBS curve. Defaults to 2.</li>
+
+<p class="font-sans"><strong>Returns:</strong> A polyline ([number, number][]) that represents the NURBS curve through the given points.</p><p class="font-sans"><strong>Description:</strong> </p><p class="font-sans">Generates a Non-Uniform Rational B-Spline (NURBS) curve, which provides great flexibility and precision in modeling curves. The <code>steps</code> parameter controls the smoothness of the curve, and the <code>degree</code> parameter defines the curve's degree, affecting its complexity and how tightly it fits to the control points.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code>tk.<span class="hljs-title function_">nurbs</span>([[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">10</span>, <span class="hljs-number">15</span>], [<span class="hljs-number">20</span>, <span class="hljs-number">5</span>]], { <span class="hljs-attr">steps</span>: <span class="hljs-number">50</span>, <span class="hljs-attr">degree</span>: <span class="hljs-number">3</span> }); <span class="hljs-comment">// Returns a polyline forming a NURBS curve with specified degree and steps</span></code></pre><h3 id="svgToPolylines" class="text-xl font-sans font-semibold text-blue-500 py-2">svgToPolylines(svg: string)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>svg</code> (string): An SVG path string to be converted into polylines.</li>
+<p class="font-sans"><strong>Returns:</strong> An array of polylines ([number, number][][]), where each polyline corresponds to a path in the SVG.</p><p class="font-sans"><strong>Description:</strong> </p><p class="font-sans">Converts SVG path data into an array of polylines. </p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code>tk.<span class="hljs-title function_">svgToPolylines</span>(<span class="hljs-string">`&lt;svg&gt;&lt;path d="M0,0 L10,10 Q15,15 20,5" /&gt;&lt;/svg&gt;`</span>); <span class="hljs-comment">// Returns an array of polylines representing the SVG path</span></code></pre><h2 class="text-2xl font-sans font-semibold text-gray-800 py-2">Randomness</h2><h3 id="rand" class="text-xl font-sans font-semibold text-blue-500 py-2">rand()</h3><p class="font-sans"><strong>Returns:</strong> A random number between 0 and 1.</p><p class="font-sans"><strong>Description:</strong> </p><p class="font-sans">Generates a random floating-point number between 0 (inclusive) and 1 (inclusive). This function does not require any parameters and provides a quick way to introduce randomness into your drawing or modifications.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code>tk.<span class="hljs-title function_">rand</span>(); <span class="hljs-comment">// Might return 0.123456789</span></code></pre><h3 id="randInRange" class="text-xl font-sans font-semibold text-blue-500 py-2">randInRange(min, max)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>min</code> (number): The minimum value (inclusive).</li>
+<li><code>max</code> (number): The maximum value (inclusive).</li>
+<p class="font-sans"><strong>Returns:</strong> A random number between <code>min</code> and <code>max</code>.</p><p class="font-sans"><strong>Description:</strong> </p><p class="font-sans">Generates a random floating-point number within a specified range. The function takes two parameters: the minimum value (inclusive) and the maximum value (exclusive), and returns a random number within this range.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code>tk.<span class="hljs-title function_">randInRange</span>(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>); <span class="hljs-comment">// Might return 15.6789</span></code></pre><h3 id="randIntInRange" class="text-xl font-sans font-semibold text-blue-500 py-2">randIntInRange(min, max)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>min</code> (number): The minimum value (inclusive).</li>
+<li><code>max</code> (number): The maximum value (inclusive).</li>
+<p class="font-sans"><strong>Returns:</strong> A random integer between <code>min</code> and <code>max</code>.</p><p class="font-sans"><strong>Description:</strong> </p><p class="font-sans">Generates a random integer within a specified range. This function is similar to <code>randInRange</code> but ensures the returned value is an integer. The <code>max</code> value is inclusive, making the range of possible outcomes slightly wider.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code>tk.<span class="hljs-title function_">randIntInRange</span>(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>); <span class="hljs-comment">// Might return 7</span></code></pre><h3 id="setRandSeed" class="text-xl font-sans font-semibold text-blue-500 py-2">setRandSeed(seed)</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>seed</code> (number): A seed value to initialize the random number generator.</li>
+<p class="font-sans"><strong>Returns:</strong> Nothing.</p><p class="font-sans"><strong>Description:</strong> </p><p class="font-sans">Initializes the random number generator with a specific seed. This function is useful for creating repeatable sequences of random numbers. Setting the same seed value will reset the random number generator to produce the same sequence of numbers.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code>tk.<span class="hljs-title function_">setRandSeed</span>(<span class="hljs-number">12345</span>);</code></pre><h3 id="noise" class="text-xl font-sans font-semibold text-blue-500 py-2">noise(input, options = { octaves, falloff })</h3><p class="font-sans"><strong>Parameters:</strong></p><li><code>input</code> (number | [number, ?number, ?number]): A single number or an array representing the coordinates (x, [y], [z]) in n-dimensional noise space.</li>
+<li><code>options</code> (object, optional): Configuration options for noise generation</li><li><code>octaves</code> (number [0 to 8]): The number of octaves of noise to generate. More octaves produce more detailed noise at the cost of performance.</li>
+<li><code>falloff</code> (number [0 to 100]): The rate at which the noise detail decreases across octaves.</li>
+
+<p class="font-sans"><strong>Returns:</strong> A noise value between -1 and 1 based on the input coordinates and options.</p><p class="font-sans"><strong>Description:</strong> </p><p class="font-sans">Generates Perlin noise or simplex noise based on the input coordinates and configuration options. This function can produce noise in one, two, or three dimensions and is configured by the number of octaves and the falloff rate. It's useful for generating natural-looking textures, landscapes, or other organic variations.</p><p class="font-sans"><strong>Example:</strong></p><pre class="overflow-x-auto"><code>tk.<span class="hljs-title function_">noise</span>(<span class="hljs-number">0.5</span>);
+tk.<span class="hljs-title function_">noise</span>([<span class="hljs-number">0.5</span>, <span class="hljs-number">2.4</span>]);
+tk.<span class="hljs-title function_">noise</span>([<span class="hljs-number">0.5</span>, <span class="hljs-number">2.4</span>, <span class="hljs-number">3</span>]);
+tk.<span class="hljs-title function_">noise</span>(<span class="hljs-number">0.5</span>, { <span class="hljs-attr">octaves</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">falloff</span>: <span class="hljs-number">50</span> }); <span class="hljs-comment">// Might return 0.3425</span>
+tk.<span class="hljs-title function_">noise</span>([<span class="hljs-number">0.5</span>, <span class="hljs-number">1.2</span>], { <span class="hljs-attr">octaves</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">falloff</span>: <span class="hljs-number">75</span> }); <span class="hljs-comment">// Might return -0.5687</span></code></pre><!--
+  
+## Easing Curves
+
+### bezierEasing(startY, controlPt0, controlPt1, endY)
+
+**Parameters:**
+- `startY` (number): The starting Y value of the Bezier curve.
+- `controlPt0` ([number, number]): The first control point as a 2D coordinate `[x, y]`, influencing the curve's shape.
+- `controlPt1` ([number, number]): The second control point as a 2D coordinate `[x, y]`, influencing the curve's shape.
+- `endY` (number): The ending Y value of the Bezier curve.
+
+**Returns:** A function that, when given an X value between 0 and 1, returns the corresponding Y value on the Bezier curve defined by the input parameters.
+
+**Description:** 
+
+Creates a Bezier easing function based on the provided start and end Y values and two control points. 
+This function is useful for generating smooth, customizable easing curves for interpolations between two values. 
+The returned function maps an input X (ranging from 0 to 1) to a Y value on the Bezier curve.
+
+**Example:**
+
+```js
+const ease = tk.bezierEasing(0, [0.25, 0.1], [0.25, 1], 1);
+const y = ease(0.5); // Returns the Y value at X=0.5 on the Bezier curve
+```
+
+-->
+    </div>
+    <script>
+      // Function to scroll to the element and briefly highlight it
+      function scrollToElementAndHighlight(hash) {
+        const targetElement = document.querySelector(hash);
+        if (targetElement) {
+          // Briefly make the background yellow
+          targetElement.style.backgroundColor = '#fceb80';
+
+          // Calculate the position to scroll to
+          const elementRect = targetElement.getBoundingClientRect();
+          const absoluteElementTop = elementRect.top + window.pageYOffset;
+          const middlePosition = absoluteElementTop - (window.innerHeight / 2) + (elementRect.height / 2);
+
+          // Scroll to the element
+          window.scrollTo({
+            top: middlePosition,
+            behavior: 'smooth'
+          });
+
+          // Optionally, revert the background color after scrolling
+          setTimeout(() => {
+            targetElement.style.backgroundColor = ''; // Revert to original or specified background color
+          }, 1000); // Adjust time as needed
+        }
+      }
+
+      // Handle initial hash, if present, on page load
+      if (window.location.hash) {
+        scrollToElementAndHighlight(window.location.hash);
+      }
+
+      // Listen for hash changes to handle in-page navigation or direct URL hash navigation
+      window.addEventListener('hashchange', function() {
+        scrollToElementAndHighlight(window.location.hash);
+      });
+    </script>
+  
+  
+      
+    
+
+  </body></html>
