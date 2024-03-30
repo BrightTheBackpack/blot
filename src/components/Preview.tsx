@@ -77,7 +77,7 @@ function init() {
       panZoomParams.panY =
         fixedPoint.y + (newScale / scale) * (panY - fixedPoint.y)
       panZoomParams.scale = newScale
-      patchStore({stoploop:false,breakit:true})
+      patchStore({stoploop:false,breakit:true,isAnimating:false})
       requestRedraw(canvas)
     },
     { passive: false }
@@ -116,7 +116,7 @@ function init() {
 
     panZoomParams.panX += e.movementX
     panZoomParams.panY += e.movementY
-    patchStore({stoploop:false,breakit:true})
+    patchStore({stoploop:false,breakit:true,isAnimating:false})
     requestRedraw(canvas)
   })
 
@@ -138,7 +138,7 @@ function init() {
       br.width / 2 - (docDimensions.width * panZoomParams.scale) / 2
     panZoomParams.panY =
       br.height / 2 + (docDimensions.height * panZoomParams.scale) / 2
-      patchStore({stoploop:false,breakit:true})
+      patchStore({stoploop:false,breakit:true,isAnimating:false})
     requestRedraw(canvas)
   })
 
@@ -148,7 +148,7 @@ function init() {
     canvas.width = width * dpr
     canvas.height = height * dpr
     setCtxProperties() // setting width/height clears ctx state
-    patchStore({stoploop:false,breakit:true})
+    patchStore({stoploop:false,breakit:true,isAnimating:false})
     requestRedraw(canvas)
   })
 
@@ -167,6 +167,7 @@ let dpr = typeof window === 'undefined' ? 1 : window.devicePixelRatio || 1
 
 const requestRedraw = (canvas: HTMLCanvasElement, animate= false) => {
   requestAnimationFrame(() => {
+    
     _redraw(canvas, animate)
   })
 }
@@ -206,7 +207,7 @@ const _redraw = (canvas: HTMLCanvasElement, animate = false) => {
   const width = canvas.width /* / dpr*/
   const height = canvas.height /* / dpr*/
   console.log(docW, docH)
-  let animationspeed = 200
+  let animationspeed = 25
 
   // turtle canvas
   const ctx = getCtx(canvas)
@@ -255,11 +256,14 @@ const _redraw = (canvas: HTMLCanvasElement, animate = false) => {
 
   for (const turtle of turtles) {//[turtle,k] -> turtle
     ctx.beginPath()
-    let t = -1;
-     k++
+    let t = 1;
+    
+     
     
 
     for (const polyline of turtle.path) {//[polyline,k] -> polyline
+      
+      
        
       
       // let paths = polyline.map(([x, y]) => [
@@ -276,14 +280,30 @@ const _redraw = (canvas: HTMLCanvasElement, animate = false) => {
         
         if(animate){
           setTimeout(() => {
+            
             t++
+            console.log(turtles.length)
             console.log(polyline.length)
-            console.log('t: ',t,'k: ', k)
+              console.log('t: ',t)
+
+            
+            
     
           
-            if(t==polyline.length -1){
-              console.log('ITS FALSE NOW')
-              patchStore({isAnimating:false})
+            if(t==polyline.length -1 ){
+              console.log(turtle.length)
+              console.log('k: ',k)
+              k++
+              
+            
+
+              if(k==turtle.length ){
+                console.log('ITS FALSE NOW')
+                patchStore({isAnimating:false})
+
+              }
+              
+              
             }
             // if(k==turtles.length-1||t==turtle.path.length-1){//just comment this entire if statement out
             //   patchStore({isAnimating:false})
@@ -312,10 +332,7 @@ const _redraw = (canvas: HTMLCanvasElement, animate = false) => {
             }
             if(breakit){
               
-              
-              j=0
-              animationspeed = 0;
-              
+          
               return
             }else{
        

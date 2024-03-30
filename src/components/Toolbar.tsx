@@ -191,7 +191,9 @@ function RunButton() {
   }, [])
 
   return (
-    <Button class="relative" variant="ghost" onClick={() => runCode()}>
+    <Button class="relative" variant="ghost" onClick={() => {
+      patchStore({isAnimating:false})
+      runCode()}}>
       run (shift+enter)
       { getStore().codeRunning  && 
         <div class="absolute mx-auto bottom-0 left-0 right-0 text-xs text-gray-300">
