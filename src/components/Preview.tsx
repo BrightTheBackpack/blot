@@ -294,14 +294,15 @@ const _redraw = (canvas: HTMLCanvasElement, animate = false) => {
               console.log(turtle.length)
               console.log('k: ',k)
               k++
+              patchStore({isAnimating:false})//delete once multiturtle works
               
             
 
-              if(k==turtle.length ){
-                console.log('ITS FALSE NOW')
-                patchStore({isAnimating:false})
+              // if(k==turtle.length ){
+              //   console.log('ITS FALSE NOW')
+              //   patchStore({isAnimating:false})
 
-              }
+              // }
               
               
             }
