@@ -78,17 +78,17 @@ export async function build(htmls) {
   }
 
 
-  // console.time("DELETE")
+  console.time("DELETE")
   await deleteAllFiles(OUTPUT_DIR);
-  // console.timeEnd("DELETE")
+  console.timeEnd("DELETE")
 
-  // console.time("BUILD")
+  console.time("BUILD")
   await Promise.all(Object.entries(htmls).map(async ([name, content]) => {
     return bundleHtmlScripts(name, content);
   }));
-  // console.timeEnd("BUILD")
+  console.timeEnd("BUILD")
 
-  // console.time("COPY")
+  console.time("COPY")
   await fs.cpSync("./public", OUTPUT_DIR, { recursive: true });
-  // console.timeEnd("COPY")
+  console.timeEnd("COPY")
 }

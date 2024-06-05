@@ -1,0 +1,129 @@
+<!DOCTYPE html><html lang="en"><head>
+        <meta name="description" content="Blot!">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="blot">
+        <title>Blot</title>
+
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Blot">
+        <meta property="og:description" content="Blot the plotter bot, from Hack Club.">
+        <meta property="og:url" content="https://blot.hackclub.com">
+        <meta property="og:image" content="https://blot.hackclub.com/assets/blot-white-bg.jpg">
+
+        <script defer="" data-domain="blot.hackclub.com" src="https://plausible.io/js/script.js"></script>
+
+        <link rel="icon" type="image/svg+xml" href="/assets/borpheus.svg" id="favicon">
+        <script>
+          function changeFavicon() {
+            const favicon = document.getElementById('favicon');
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            if (darkModeMediaQuery.matches) {
+              favicon.href = '/assets/borpheus.svg'; // White favicon for dark mode
+            } else {
+              favicon.href = '/assets/black-borpheus.svg'; // Black favicon for light mode
+            }
+          }
+
+          // Initial check
+          changeFavicon();
+
+          // Listener for changes in color scheme
+          window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', changeFavicon);
+        </script>
+
+        <link rel="stylesheet" href="./styles.css">
+        
+        <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+        <!-- <link rel="stylesheet" href="../tailwind.css"> -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script> -->
+        <!-- <script leave-it src="./libs/tailwindjit.js"></script> -->
+      </head>
+      <body class="overflow-x-hidden">
+        
+    
+    <nav class="bg-[--primary] text-white flex items-center justify-between text-lg p-2 sticky top-0 z-50" style="font-family: var(--font-sans);">
+
+      <a href="/" class="flex gap-1 items-center">
+        <img src="/assets/borpheus.svg" class="w-7 translate-x-1 translate-y-[-3px]">
+        <span class="text-2xl font-bold">lot</span>
+      </a>
+
+      <div class="flex gap-4">
+
+        <a href="/editor" class="flex h-full gap-1 items-center hover:opacity-60">
+          <img src="/icons/editor.svg">
+          <span class="hidden sm:block">editor</span>
+        </a>
+
+        <a href="/guides" class="flex h-full gap-1 items-center hover:opacity-60">
+          <img src="/icons/guides.svg">
+          <span class="hidden sm:block">guides</span>
+        </a>
+
+        <a href="/gallery" class="flex h-full gap-1 items-center hover:opacity-60">
+          <img src="/icons/gallery.svg">
+          <span class="hidden sm:block">gallery</span>
+        </a>
+
+        <a href="https://github.com/hackclub/blot/blob/main/docs/ASSEMBLY.md" class="flex h-full gap-1 items-center hover:opacity-60">
+          <img src="/icons/wrench.svg">
+          <span class="hidden sm:block">build guide</span>
+        </a>
+
+        <a href="https://github.com/hackclub/blot" class="flex h-full gap-1 items-center hover:opacity-60" rel="noreferrer" target="_blank">
+          <img src="/icons/github.svg">
+          <span class="hidden sm:block">source</span>
+        </a>
+
+      </div>
+    </nav>
+  
+    
+    <style>
+      body,
+      html {
+        background-size: 40px 40px;
+        background-image: linear-gradient(to right, #ddd 1px, transparent 1px),
+          linear-gradient(to bottom, #ddd 1px, transparent 1px);
+        min-height: 100vh;
+        font-family:
+          'Phantom Sans',
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          sans-serif;
+      }
+    </style>
+
+    <div class="p-1 ml-10">
+      <div class="text-[3rem] font-[700]">Guides</div>
+      <div class="text-[1.7rem] font-[300]">
+        A collection of various guides created by Hack Clubbers that anyone can
+        learn from and contribute to!
+      </div>
+    </div>
+
+    <div class="flex flex-row flex-wrap items-center justify-around w-screen gap-y-6 my-5">
+      <a class="no-underline text-current w-[30%] min-w-[300px] max-w-[400px] aspect-[1] rounded-[27px] flex items-center flex-col justify-around p-[17px] shadow-md transition-transform duration-300 ease-in-out transition-shadow hover:scale-105 hover:shadow-lg" style="background-image: linear-gradient(170deg, #cecef9, #e7f0fb);" href="/editor?guide=start">
+        <img class="max-w-full max-h-full object-contain rounded-lg transition-opacity duration-300 ease-in-out group-hover:opacity-90" src="/getting-started/feather-montage.png">
+        <div class="p-2.5">Intro to the Blot Toolkit</div>
+      </a>
+      <a class="no-underline text-current w-[30%] min-w-[300px] max-w-[400px] aspect-[1] rounded-[27px] flex items-center flex-col justify-around p-[17px] shadow-md transition-transform duration-300 ease-in-out transition-shadow hover:scale-105 hover:shadow-lg" style="background-image: linear-gradient(170deg, #cecef9, #e7f0fb);" href="/editor?guide=square-disarray">
+                <img class="max-w-full max-h-full object-contain rounded-lg transition-opacity duration-300 ease-in-out group-hover:opacity-90" src="https://cloud-qogbw3upi-hack-club-bot.vercel.app/0260524306-bcaf04e7-a00e-4f98-aaed-01eeebf2c79c.webp">
+                <div class="p-2.5">Square Disarray</div>
+              </a> <a class="no-underline text-current w-[30%] min-w-[300px] max-w-[400px] aspect-[1] rounded-[27px] flex items-center flex-col justify-around p-[17px] shadow-md transition-transform duration-300 ease-in-out transition-shadow hover:scale-105 hover:shadow-lg" style="background-image: linear-gradient(170deg, #cecef9, #e7f0fb);" href="/editor?guide=leaf">
+                <img class="max-w-full max-h-full object-contain rounded-lg transition-opacity duration-300 ease-in-out group-hover:opacity-90" src="https://cloud-7rdff2vjy-hack-club-bot.vercel.app/0250635645-9ce96217-bc5e-49cc-87b2-178681188eb3.webp">
+                <div class="p-2.5">How to draw a leaf</div>
+              </a>
+    </div>
+   
+  
+  
+      
+    
+
+  </body></html>
