@@ -138,6 +138,7 @@ async function addShareIdURLParam() {
 
   const shareId = currentUrl.searchParams.get('shareId')
 
+
   if (!shareId) return
 
   try {
@@ -145,6 +146,7 @@ async function addShareIdURLParam() {
     const content = await response.text()
 
     loadCodeFromString(content)
+
     removeQueryParam('shareId')
   } catch (error) {
     console.error('Error fetching content:', error)
