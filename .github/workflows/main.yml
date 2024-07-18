@@ -3,7 +3,7 @@ run-name: Preview
 on: 
     pull_request_target: 
         types: [opened, synchronize, reopened,labeled]
-        paths: 'art/**'
+
 
 jobs:
   echo-input:
