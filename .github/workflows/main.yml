@@ -26,7 +26,7 @@ jobs:
         with:
           github-token: ${{ secrets.ORPHEUS_PAT || secrets.GITHUB_TOKEN }}
           script: |
-            const script = require('./blot/.github/workflows/test.js')
+            const script = require('./blot/.github/workflows/preview.js')
             const { chdir } = require('node:process');
             chdir('./pr');
             console.log(await script({gh: github, ctx: context}))
