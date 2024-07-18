@@ -1,7 +1,5 @@
 const execSync = require("child_process").execSync;
-const path = require("node:path");
-const fs = require("fs").promises;
-const fss = require("fs");
+
 
 var github = undefined;
 var context = undefined;
@@ -71,12 +69,7 @@ async function gitDiffFiles() {
   return gitdifffiles;
 }
 
-async function currentCommitHash() {
-  //console.error(context);
-  let s = execSync("git rev-parse HEAD", { encoding: "utf-8", timeout: 3000 });
-  console.error(s.trim());
-  return s.trim();
-}
+
 
 module.exports = run;
 
@@ -104,7 +97,7 @@ async function mainReal(readme) {
 
 async function processREADME(readme) {
   var ans = `
-**${path.dirname(readme)}:**
+****
 
 Required files
 ||||
@@ -112,14 +105,14 @@ Required files
 |✅| README.md | A description of your project |
 |${(await hasCart(readme)) ? "✅" : "❌"} | cart.png | ${(await hasCart(readme))
       ? "![cart.png](<https://raw.githubusercontent.com/hackclub/OnBoard/" +
-      (await currentCommitHash()) +
+      (
       "/" +
       path.dirname(readme) +
       "/cart.png>)"
       : "You need to include a screenshot of your JLCPCB. Check out [these instructions](https://github.com/hackclub/OnBoard/blob/main/docs/ordering_from_JLCPCB.md#pcb-review). If you already have one, make sure it's a PNG file named exactly \"cart.png\"."
     } |`; // TODO: can we handle both png and jpg/jpeg??
 
-  let gerbers = await gerbersInDir(path.dirname(readme));
+  // let gerbers = await gerbersInDir(path.dirname(readme));
 
   if (gerbers.length === 0) {
     ans += `
@@ -149,11 +142,11 @@ async function eachGerber(gerber) {
   }
   let URL =
     `https://gerber.zip/2d/?mode=layers&boardUrl=https://raw.githubusercontent.com/hackclub/OnBoard/` +
-    (await currentCommitHash()) +
+    (
     "/" +
     gerber;
   let [srcstatus, srcsw, srcmessage] = await analyzeSourceFiles(gerber);
-  let rawPdfUrl = `https://raw.githubusercontent.com/hackclub/OnBoard/${await currentCommitHash()}/${path.dirname(gerber)}/schematic.pdf`
+
   return `
 |${(await isValidGerber(gerber)) ? "✅" : "❌"}| gerber.zip | ${(await isValidGerber(gerber))
       ? ""
