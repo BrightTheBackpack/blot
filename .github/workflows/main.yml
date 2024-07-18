@@ -1,0 +1,32 @@
+name: Preview
+run-name: Preview
+on: 
+    pull_request_target: 
+        types: [opened, synchronize, reopened,labeled]
+        paths: 'projects/**'
+
+jobs:
+  echo-input:
+    #if: contains(github.event.pull_request.labels.*.name, 'Submission') || contains(github.event.pull_request.labels.*.name, 'PCB')
+    # don't need this condition, because gets called on.pull_request.paths == 'projects/**' above. Leaving for posterity.
+    runs-on: ubuntu-latest
+    permissions: 
+      pull-requests: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4 # base (safe) branch because of pull_request_target
+        with:
+          path: ./blot
+      - uses: actions/checkout@v4 # unsafe, user contributed branch
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: ./pr
+
+      - uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.ORPHEUS_PAT || secrets.GITHUB_TOKEN }}
+          script: |
+            const script = require('./blot/.github/workflows/preview.js')
+            const { chdir } = require('node:process');
+            chdir('./pr');
+            console.log(await script({gh: github, ctx: context}))
