@@ -27,9 +27,12 @@ export default async function runCode() {
   //   await sleep(400);
   // }
 
-  const { runCodeInWorker } = getStore();
-
+  let { runCodeInWorker } = getStore();
+  
   const code = getCode();
+  if(code.includes("await")  || code.includes("fetch") || code.includes("async")){
+    runCodeInWorker = false
+  }
 
   // this prevents me from using await top-level
   if (!astValid()) return;
@@ -43,6 +46,7 @@ export default async function runCode() {
   )
 
   try {
+    
     if (!runCodeInWorker) await runSync();
     else runAsync();
   
