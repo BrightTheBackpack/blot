@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="en"><head>
+        <meta name="description" content="Blot!">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="title" content="blot">
+        <title>Blot</title>
+
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Blot">
+        <meta property="og:description" content="Blot the plotter bot, from Hack Club.">
+        <meta property="og:url" content="https://blot.hackclub.com">
+        <meta property="og:image" content="https://blot.hackclub.com/assets/blot-white-bg.jpg">
+
+        <script defer="" data-domain="blot.hackclub.com" src="https://plausible.io/js/script.js"></script>
+
+        <link rel="icon" type="image/svg+xml" href="/assets/borpheus.svg" id="favicon">
+        <script>
+          function changeFavicon() {
+            const favicon = document.getElementById('favicon');
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            if (darkModeMediaQuery.matches) {
+              favicon.href = '/assets/borpheus.svg'; // White favicon for dark mode
+            } else {
+              favicon.href = '/assets/black-borpheus.svg'; // Black favicon for light mode
+            }
+          }
+
+          // Initial check
+          changeFavicon();
+
+          // Listener for changes in color scheme
+          window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', changeFavicon);
+        </script>
+
+        <link rel="stylesheet" href="./styles.css">
+        
+        <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+        <!-- <link rel="stylesheet" href="../tailwind.css"> -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script> -->
+        <!-- <script leave-it src="./libs/tailwindjit.js"></script> -->
+      </head>
+      <body class="overflow-x-hidden">
+        
+    
+    <nav class="bg-[--primary] text-white flex items-center justify-between text-lg p-2 sticky top-0 z-50" style="font-family: var(--font-sans);">
+
+      <a href="/" class="flex gap-1 items-center">
+        <img src="/assets/borpheus.svg" class="w-7 translate-x-1 translate-y-[-3px]">
+        <span class="text-2xl font-bold">lot</span>
+      </a>
+
+      <div class="flex gap-4">
+
+        <a href="/editor" class="flex h-full gap-1 items-center hover:opacity-60">
+          <img src="/icons/editor.svg">
+          <span class="hidden sm:block">editor</span>
+        </a>
+
+        <a href="/guides" class="flex h-full gap-1 items-center hover:opacity-60">
+          <img src="/icons/guides.svg">
+          <span class="hidden sm:block">guides</span>
+        </a>
+
+        <a href="/gallery" class="flex h-full gap-1 items-center hover:opacity-60">
+          <img src="/icons/gallery.svg">
+          <span class="hidden sm:block">gallery</span>
+        </a>
+
+        <a href="https://github.com/hackclub/blot/blob/main/docs/ASSEMBLY.md" class="flex h-full gap-1 items-center hover:opacity-60">
+          <img src="/icons/wrench.svg">
+          <span class="hidden sm:block">build guide</span>
+        </a>
+
+        <a href="https://github.com/hackclub/blot" class="flex h-full gap-1 items-center hover:opacity-60" rel="noreferrer" target="_blank">
+          <img src="/icons/github.svg">
+          <span class="hidden sm:block">source</span>
+        </a>
+
+      </div>
+    </nav>
+  
+    Go <a class="underline decoration-sky-500" href="https://github.com/hackclub/blot/blob/main/docs/ASSEMBLY.md">here</a>.
+  
+      
+    
+
+  </body></html>
